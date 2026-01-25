@@ -1,0 +1,18 @@
+# Build outputs
+**/bin/
+**/obj/
+
+# Rider/IDE
+.idea/
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS
+.DS_Store
+
+# Logs
+*.log
