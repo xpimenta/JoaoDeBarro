@@ -1,6 +1,6 @@
 using BuildingBlocks.DomainObjects.Data;
 
-namespace JoaoDeBarro.Receivables.Domain.Repositories;
+namespace JoaoDeBarro.Receivables.Domain.Interfaces;
 
 public interface IReceivableRepository : IRepository<Receivable>
 {
