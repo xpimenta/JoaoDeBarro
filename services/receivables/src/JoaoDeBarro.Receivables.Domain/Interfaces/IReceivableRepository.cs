@@ -4,7 +4,7 @@ namespace JoaoDeBarro.Receivables.Domain.Interfaces;
 
 public interface IReceivableRepository : IRepository<Receivable>
 {
-    Task<Receivable> GetReceivableAsync(Guid receivableId);
+    Task<Receivable?> GetReceivableAsync(Guid receivableId);
     Task<IEnumerable<Receivable>> GetReceivablesAsync();
     
     void AddReceivable(Receivable receivable);

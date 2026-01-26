@@ -16,7 +16,7 @@ public class ReceivableRepository : IReceivableRepository
 
     public IUnitOfWork UnitOfWork => _context;
 
-    public async Task<Receivable> GetReceivableAsync(Guid receivableId)
+    public async Task<Receivable?> GetReceivableAsync(Guid receivableId)
     {
         return await _context.Receivables
             .AsNoTracking()
@@ -35,11 +35,7 @@ public class ReceivableRepository : IReceivableRepository
 
     public void UpdateReceivable(Receivable receivable)
     {
-        _context.Receivables.Update(receivable);
+        throw new NotImplementedException();
     }
-
-    public void Dispose()
-    {
-        _context?.Dispose();
-    }
+    
 }
