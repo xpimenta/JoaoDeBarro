@@ -1,4 +1,4 @@
-using BuildingBlocks.DomainObjects.Data;
+using JoaoDeBarro.BuildingBlocks.DomainObjects.Data;
 using JoaoDeBarro.Receivables.Domain;
 using Microsoft.EntityFrameworkCore;
 

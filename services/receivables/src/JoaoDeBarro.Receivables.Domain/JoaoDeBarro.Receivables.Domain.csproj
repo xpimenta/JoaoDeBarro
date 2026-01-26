@@ -7,7 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\shared\BuildingBlocks\src\BuildingBlocks\BuildingBlocks.csproj" />
+      <ProjectReference Include="..\..\..\..\shared\BuildingBlocks\src\JoaoDeBarro.BuildingBlocks\JoaoDeBarro.BuildingBlocks.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="14.0.0" />
     </ItemGroup>
 
 </Project>

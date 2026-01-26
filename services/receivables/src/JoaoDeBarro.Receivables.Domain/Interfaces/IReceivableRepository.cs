@@ -1,4 +1,4 @@
-using BuildingBlocks.DomainObjects.Data;
+using JoaoDeBarro.BuildingBlocks.DomainObjects.Data;
 
 namespace JoaoDeBarro.Receivables.Domain.Interfaces;
 

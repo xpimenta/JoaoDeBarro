@@ -1,4 +1,4 @@
-using BuildingBlocks.DomainObjects.ValueObjects;
+using JoaoDeBarro.BuildingBlocks.DomainObjects.ValueObjects;
 using JoaoDeBarro.BuildingBlocks.DomainObjects;
 
 namespace JoaoDeBarro.Receivables.Domain;
@@ -15,13 +15,16 @@ public class Receivable :  Entity,  IAggregateRoot
 
     public DateOnly DueDate { get; private set; }
     public PaymentMethod PaymentMethod { get; private set; }
-
-    public Money GrossAmount { get; private set; }
-    public Money IssAmount { get; private set; }
-    public Money AmountReceived { get; private set; }
-
-    // -------- Derived --------
-
+    
+    public string CurrencyCode { get; private set; } = "BRL";
+    
+    private decimal _amountReceived;
+    private decimal _issAmount;
+    private decimal _grossAmount;
+    
+    public Money GrossAmount => Money.Of(_grossAmount, CurrencyCode);
+    public Money IssAmount => Money.Of(_issAmount, CurrencyCode);
+    public Money AmountReceived => Money.Of(_amountReceived, CurrencyCode);
     public Money NetAmount => GrossAmount - IssAmount;
     public Money OutstandingAmount => NetAmount - AmountReceived;
 
@@ -40,14 +43,7 @@ public class Receivable :  Entity,  IAggregateRoot
     }
 
     // EF Core
-    private Receivable()
-    {
-        CustomerName = string.Empty;
-        ServiceDescription = string.Empty;
-        GrossAmount = Money.Zero("BRL");
-        IssAmount = Money.Zero("BRL");
-        AmountReceived = Money.Zero("BRL");
-    }
+    private Receivable() {}
 
     public Receivable(
         string customerName,
@@ -64,9 +60,10 @@ public class Receivable :  Entity,  IAggregateRoot
         DueDate = dueDate;
         PaymentMethod = paymentMethod;
 
-        GrossAmount = grossAmount;
-        IssAmount = issAmount;
-        AmountReceived = Money.Zero(grossAmount.Currency);
+        CurrencyCode = grossAmount.Currency;
+        _grossAmount = grossAmount.Amount;
+        _issAmount = issAmount.Amount;
+        _amountReceived = 0m;
 
         Validate();
     }
@@ -123,7 +120,7 @@ public class Receivable :  Entity,  IAggregateRoot
             "Received amount cannot exceed outstanding amount."
         );
 
-        AmountReceived = AmountReceived + receivedAmount;
+        _amountReceived = _amountReceived + receivedAmount.Amount;
     }
 
     public void ChangeDueDate(DateOnly dueDate)
@@ -136,4 +133,3 @@ public class Receivable :  Entity,  IAggregateRoot
         PaymentMethod = paymentMethod;
     }
 }
-

@@ -9,12 +9,7 @@ public class ReceivableMapping : IEntityTypeConfiguration<Receivable>
     public void Configure(EntityTypeBuilder<Receivable> builder)
     {
         builder.ToTable("Receivables");
-
         builder.HasKey(x => x.Id);
-
-        // -------------------------
-        // Simple properties
-        // -------------------------
 
         builder.Property(x => x.CustomerName)
             .IsRequired()
@@ -43,66 +38,39 @@ public class ReceivableMapping : IEntityTypeConfiguration<Receivable>
 
         builder.Property(x => x.PaymentMethod)
             .IsRequired()
-            .HasConversion<int>(); // enum -> int
+            .HasConversion<int>();
 
-        // -------------------------
-        // Value Objects (Money) - Owned Types
-        // -------------------------
+        // 1 currency per row
+        builder.Property(x => x.CurrencyCode)
+            .IsRequired()
+            .HasColumnType("char(3)");
 
-        builder.OwnsOne(x => x.GrossAmount, money =>
-        {
-            money.Property(p => p.Amount)
-                .HasColumnName("GrossAmount")
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
+        // Map backing fields as columns
+        builder.Property<decimal>("_grossAmount")
+            .HasColumnName("GrossAmount")
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
 
-            money.Property(p => p.Currency)
-                .HasColumnName("GrossCurrency")
-                .HasColumnType("char(3)")
-                .IsRequired();
-        });
-        builder.Navigation(x => x.GrossAmount).IsRequired();
+        builder.Property<decimal>("_issAmount")
+            .HasColumnName("IssAmount")
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
 
-        builder.OwnsOne(x => x.IssAmount, money =>
-        {
-            money.Property(p => p.Amount)
-                .HasColumnName("IssAmount")
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
+        builder.Property<decimal>("_amountReceived")
+            .HasColumnName("AmountReceived")
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
 
-            money.Property(p => p.Currency)
-                .HasColumnName("IssCurrency")
-                .HasColumnType("char(3)")
-                .IsRequired();
-        });
-        builder.Navigation(x => x.IssAmount).IsRequired();
-
-        builder.OwnsOne(x => x.AmountReceived, money =>
-        {
-            money.Property(p => p.Amount)
-                .HasColumnName("AmountReceived")
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
-
-            money.Property(p => p.Currency)
-                .HasColumnName("ReceivedCurrency")
-                .HasColumnType("char(3)")
-                .IsRequired();
-        });
-        builder.Navigation(x => x.AmountReceived).IsRequired();
-
-        // -------------------------
-        // Derived / calculated properties - not persisted (MVP)
-        // -------------------------
+        // Ignore domain-calculated properties
+        builder.Ignore(x => x.GrossAmount);
+        builder.Ignore(x => x.IssAmount);
+        builder.Ignore(x => x.AmountReceived);
         builder.Ignore(x => x.NetAmount);
         builder.Ignore(x => x.OutstandingAmount);
         builder.Ignore(x => x.Status);
 
-        // -------------------------
-        // Useful indexes (MVP)
-        // -------------------------
+        // Useful indexes
         builder.HasIndex(x => x.DueDate);
         builder.HasIndex(x => x.CustomerName);
-        builder.HasIndex(x => x.PaymentMethod);
     }
 }

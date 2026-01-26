@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{65C0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{28F3325F-9EE9-4E7D-B1A9-9983812E36B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "shared\BuildingBlocks\src\BuildingBlocks\BuildingBlocks.csproj", "{E0F783A4-BE87-4C09-8B25-5DBF1D378390}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.BuildingBlocks", "shared\BuildingBlocks\src\JoaoDeBarro.BuildingBlocks\JoaoDeBarro.BuildingBlocks.csproj", "{E0F783A4-BE87-4C09-8B25-5DBF1D378390}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Domain", "services\receivables\src\JoaoDeBarro.Receivables.Domain\JoaoDeBarro.Receivables.Domain.csproj", "{5508F15D-4928-462D-8914-7BAC37990F24}"
 EndProject
