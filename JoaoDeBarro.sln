@@ -10,11 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.BuildingBlocks"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Domain", "services\receivables\src\JoaoDeBarro.Receivables.Domain\JoaoDeBarro.Receivables.Domain.csproj", "{5508F15D-4928-462D-8914-7BAC37990F24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Application", "services\JoaoDeBarro.Receivables.Application\JoaoDeBarro.Receivables.Application.csproj", "{5B871F4C-1952-464A-B459-A5725951B788}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Application", "services\receivables\src\JoaoDeBarro.Receivables.Application\JoaoDeBarro.Receivables.Application.csproj", "{5B871F4C-1952-464A-B459-A5725951B788}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Infrastructure", "services\JoaoDeBarro.Receivables.Infrastructure\JoaoDeBarro.Receivables.Infrastructure.csproj", "{638DF4F1-0A56-4ED6-A2C8-8D10A4071877}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Infrastructure", "services\receivables\src\JoaoDeBarro.Receivables.Infrastructure\JoaoDeBarro.Receivables.Infrastructure.csproj", "{638DF4F1-0A56-4ED6-A2C8-8D10A4071877}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Api", "services\JoaoDeBarro.Receivables.Api\JoaoDeBarro.Receivables.Api.csproj", "{D6318F50-9C7F-46C3-8B31-3E97D9CD177E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Receivables.Api", "services\receivables\src\JoaoDeBarro.Receivables.Api\JoaoDeBarro.Receivables.Api.csproj", "{D6318F50-9C7F-46C3-8B31-3E97D9CD177E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
