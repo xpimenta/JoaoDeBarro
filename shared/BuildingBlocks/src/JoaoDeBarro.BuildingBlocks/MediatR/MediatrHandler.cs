@@ -1,18 +1,19 @@
 using JoaoDeBarro.BuildingBlocks.Events;
+using MediatR;
 
 namespace JoaoDeBarro.BuildingBlocks.MediatR;
 
 public class MediatrHandler : IMediatrHandler
 {
-    private readonly IMediatrHandler _mediatrHandler;
+    private readonly IMediator _mediator;
 
-    public MediatrHandler(IMediatrHandler mediatrHandler)
+    public MediatrHandler(IMediator mediator)
     {
-        _mediatrHandler = mediatrHandler;
+        _mediator = mediator;
     }
 
     public async Task PublishEvent<T>(T eventToSend) where T : Event
     {
-        await _mediatrHandler.PublishEvent(eventToSend);
+        await _mediator.Publish(eventToSend);
     }
 }

@@ -19,6 +19,5 @@ public static class DI
         services.AddScoped<IReceivableRepository, ReceivableRepository>();
         services.AddScoped<IReceivableAppService, ReceivableAppService>();
         services.AddScoped<ReceivableContext>();
-
     }
 }

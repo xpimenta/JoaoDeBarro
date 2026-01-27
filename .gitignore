@@ -22,6 +22,9 @@
 # Logs
 *.log
 
+# Env
+.env
+
 # Test results / coverage
 TestResults/
 **/TestResults/
