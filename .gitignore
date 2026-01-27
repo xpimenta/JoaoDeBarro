@@ -1,6 +1,7 @@
 # Build outputs
 **/bin/
 **/obj/
+**/publish/
 
 # Rider/IDE
 .idea/
@@ -10,9 +11,25 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.DotSettings.user
+*.DotSettings
+*.sln.iml
+*.rsuser
 
 # OS
 .DS_Store
 
 # Logs
 *.log
+
+# Test results / coverage
+TestResults/
+**/TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/
