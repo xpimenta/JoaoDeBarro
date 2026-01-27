@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\shared\BuildingBlocks\src\JoaoDeBarro.BuildingBlocks\JoaoDeBarro.BuildingBlocks.csproj" />
+      <ProjectReference Include="..\JoaoDeBarro.Receivables.Application\JoaoDeBarro.Receivables.Application.csproj" />
+      <ProjectReference Include="..\JoaoDeBarro.Receivables.Domain\JoaoDeBarro.Receivables.Domain.csproj" />
+      <ProjectReference Include="..\JoaoDeBarro.Receivables.Infrastructure\JoaoDeBarro.Receivables.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
