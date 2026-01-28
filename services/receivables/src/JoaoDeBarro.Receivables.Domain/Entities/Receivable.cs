@@ -35,7 +35,7 @@ public class Receivable :  Entity,  IAggregateRoot
         {
             if (OutstandingAmount.IsZero) return ReceivableStatus.Settled;
 
-            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            var today = DateOnly.FromDateTime(DateTime.Now);
             if (DueDate < today) return ReceivableStatus.Overdue;
             if (DueDate == today) return ReceivableStatus.DueToday;
 
