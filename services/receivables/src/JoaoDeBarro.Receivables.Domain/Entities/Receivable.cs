@@ -1,5 +1,6 @@
-using JoaoDeBarro.BuildingBlocks.DomainObjects.ValueObjects;
 using JoaoDeBarro.BuildingBlocks.DomainObjects;
+using JoaoDeBarro.SharedKernel.Enums;
+using JoaoDeBarro.SharedKernel.ValueObjects;
 
 namespace JoaoDeBarro.Receivables.Domain;
 

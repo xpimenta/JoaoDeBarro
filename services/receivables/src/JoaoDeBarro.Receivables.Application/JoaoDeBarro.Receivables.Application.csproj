@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\shared\BuildingBlocks\src\JoaoDeBarro.BuildingBlocks\JoaoDeBarro.BuildingBlocks.csproj" />
       <ProjectReference Include="..\JoaoDeBarro.Receivables.Domain\JoaoDeBarro.Receivables.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\shared\SharedKernel\src\JoaoDeBarro.SharedKernel\JoaoDeBarro.SharedKernel.csproj" />
     </ItemGroup>
 
     <ItemGroup>

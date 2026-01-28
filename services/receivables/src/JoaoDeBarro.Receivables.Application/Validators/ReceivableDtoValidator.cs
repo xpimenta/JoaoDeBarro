@@ -1,6 +1,6 @@
 using FluentValidation;
 using JoaoDeBarro.Receivables.Application.DTOs;
-using JoaoDeBarro.Receivables.Domain;
+using JoaoDeBarro.SharedKernel.Enums;
 
 namespace JoaoDeBarro.Receivables.Application.Validators;
 

@@ -1,7 +1,8 @@
 using AutoMapper;
-using JoaoDeBarro.BuildingBlocks.DomainObjects.ValueObjects;
 using JoaoDeBarro.Receivables.Application.DTOs;
 using JoaoDeBarro.Receivables.Domain;
+using JoaoDeBarro.SharedKernel.Enums;
+using JoaoDeBarro.SharedKernel.ValueObjects;
 
 namespace JoaoDeBarro.Receivables.Application.AutoMapper;
 
