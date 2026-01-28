@@ -7,7 +7,6 @@ namespace JoaoDeBarroPayables.Domain;
 public class Payable : Entity, IAggregateRoot
 {
     public string Description { get; }
-    public string CurrencyCode { get; }
     public DateOnly DueDate { get; }
     public DateOnly? PaymentDate { get; }
     public PaymentMethod PaymentMethod { get; }
@@ -16,6 +15,7 @@ public class Payable : Entity, IAggregateRoot
     private decimal _interestAmoutValue;
     private decimal _amountPaidValue;
     
+    public string CurrencyCode { get; } = "BRL";
     public Money PrincipalAmount => Money.Of(_principalAmountValue, CurrencyCode);
     public Money InterestAmount => Money.Of(_interestAmoutValue, CurrencyCode);
     public Money AmoutPaid => Money.Of(_amountPaidValue, CurrencyCode);
