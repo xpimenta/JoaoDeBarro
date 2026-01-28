@@ -28,11 +28,12 @@ public class ReceivableAppService : IReceivableAppService
         return _mapper.Map<IEnumerable<ReceivableDto>>(await _receivableRepository.GetReceivablesAsync());
     }
 
-    public async Task AddReceivable(ReceivableDto receivableDto)
+    public async Task<Guid> AddReceivable(ReceivableDto receivableDto)
     {
         var receivable = _mapper.Map<Receivable>(receivableDto);
         _receivableRepository.AddReceivable(receivable);
         await _receivableRepository.UnitOfWork.CommitAsync();
+        return receivable.Id;
     }
 
     public async Task UpdateReceivable(ReceivableDto receivableDto)

@@ -7,6 +7,6 @@ public interface IReceivableAppService
     Task<ReceivableDto?> GetReceivableAsync(Guid receivableId);
     Task<IEnumerable<ReceivableDto>> GetReceivablesAsync();
     
-    Task AddReceivable(ReceivableDto receivable);
+    Task<Guid> AddReceivable(ReceivableDto receivable);
     Task UpdateReceivable(ReceivableDto receivable);
 }
