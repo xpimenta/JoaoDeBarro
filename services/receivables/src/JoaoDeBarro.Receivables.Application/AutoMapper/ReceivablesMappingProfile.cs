@@ -33,8 +33,8 @@ public class ReceivablesMappingProfile : Profile
             .ForMember(d => d.Status, opt => opt.Ignore())
             .AfterMap((dto, entity) =>
             {
-                if (dto.Id != Guid.Empty)
-                    entity.Id = dto.Id;
+                if (dto.Id.HasValue && dto.Id.Value != Guid.Empty)
+                    entity.Id = dto.Id.Value;
 
                 if (!string.IsNullOrWhiteSpace(dto.ServiceOrderNumber))
                     entity.SetServiceOrder(dto.ServiceOrderNumber);

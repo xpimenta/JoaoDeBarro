@@ -35,7 +35,7 @@ public class ReceivableRepository : IReceivableRepository
 
     public void UpdateReceivable(Receivable receivable)
     {
-        throw new NotImplementedException();
+        _context.Receivables.Update(receivable);
     }
     
 }

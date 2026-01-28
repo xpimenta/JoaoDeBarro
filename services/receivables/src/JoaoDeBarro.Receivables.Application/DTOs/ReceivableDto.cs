@@ -4,7 +4,7 @@ namespace JoaoDeBarro.Receivables.Application.DTOs;
 
 public class ReceivableDto
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
 
     public string CustomerName { get; set; } = string.Empty;
     public string ServiceDescription { get; set; } = string.Empty;
