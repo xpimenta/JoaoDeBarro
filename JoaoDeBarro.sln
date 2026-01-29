@@ -24,6 +24,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Receivables", "Receivables"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Payables.Domain", "services\payables\src\JoaoDeBarro.Payables.Domain\JoaoDeBarro.Payables.Domain.csproj", "{E1EA2484-D679-4D39-9670-422B3B651EBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Payables.Application", "services\payables\src\JoaoDeBarro.Payables.Application\JoaoDeBarro.Payables.Application.csproj", "{5C991138-1D4A-4BD4-930A-29ACF890A351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoaoDeBarro.Payables.Api", "services\payables\JoaoDeBarro.Payables.Api\JoaoDeBarro.Payables.Api.csproj", "{3538D977-49F6-4537-968C-BD23D253BD8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,7 +43,9 @@ GlobalSection(NestedProjects) = preSolution
 		{5508F15D-4928-462D-8914-7BAC37990F24} = {06E7559D-8199-4AD9-BB56-34B0FE08B75C}
 		{638DF4F1-0A56-4ED6-A2C8-8D10A4071877} = {06E7559D-8199-4AD9-BB56-34B0FE08B75C}
 		{E1EA2484-D679-4D39-9670-422B3B651EBA} = {254358F6-A4B4-4B1A-9C03-B612917C4DFB}
-	EndGlobalSection
+	{5C991138-1D4A-4BD4-930A-29ACF890A351} = {254358F6-A4B4-4B1A-9C03-B612917C4DFB}
+	{3538D977-49F6-4537-968C-BD23D253BD8E} = {254358F6-A4B4-4B1A-9C03-B612917C4DFB}
+EndGlobalSection
 GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E0F783A4-BE87-4C09-8B25-5DBF1D378390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0F783A4-BE87-4C09-8B25-5DBF1D378390}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -69,5 +75,13 @@ GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E1EA2484-D679-4D39-9670-422B3B651EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1EA2484-D679-4D39-9670-422B3B651EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1EA2484-D679-4D39-9670-422B3B651EBA}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+	{5C991138-1D4A-4BD4-930A-29ACF890A351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+	{5C991138-1D4A-4BD4-930A-29ACF890A351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	{5C991138-1D4A-4BD4-930A-29ACF890A351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	{5C991138-1D4A-4BD4-930A-29ACF890A351}.Release|Any CPU.Build.0 = Release|Any CPU
+	{3538D977-49F6-4537-968C-BD23D253BD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+	{3538D977-49F6-4537-968C-BD23D253BD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	{3538D977-49F6-4537-968C-BD23D253BD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	{3538D977-49F6-4537-968C-BD23D253BD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+EndGlobalSection
 EndGlobal

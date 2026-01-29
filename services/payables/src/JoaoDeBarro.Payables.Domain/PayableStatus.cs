@@ -1,4 +1,4 @@
-namespace JoaoDeBarroPayables.Domain;
+namespace JoaoDeBarro.Payables.Domain;
 
 /// <summary>
 /// Payable Status (Status da Conta a Pagar)

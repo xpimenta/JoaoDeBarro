@@ -2,7 +2,7 @@
 using JoaoDeBarro.SharedKernel.Enums;
 using JoaoDeBarro.SharedKernel.ValueObjects;
 
-namespace JoaoDeBarroPayables.Domain;
+namespace JoaoDeBarro.Payables.Domain;
 
 public class Payable : Entity, IAggregateRoot
 {
