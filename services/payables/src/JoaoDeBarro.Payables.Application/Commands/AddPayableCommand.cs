@@ -1,5 +1,5 @@
 using FluentValidation;
-using JoaoDeBarro.BuildingBlocks.Events;
+using JoaoDeBarro.BuildingBlocks.Messages;
 using JoaoDeBarro.SharedKernel.Enums;
 
 namespace JoaoDeBarro.Payables.Application.Commands;
@@ -10,18 +10,20 @@ public class AddPayableCommand : Command
     public DateOnly DueDate { get; }
     public DateOnly? PaymentDate { get; }
     public PaymentMethod PaymentMethod { get; }
+    public string CurrencyCode { get; }
     public decimal _principalAmountValue { get; }
     public decimal _interestAmoutValue{ get; }
     public decimal _amountPaidValue{ get; }
     public string Category { get; }
     public string Notes { get; }
 
-    public AddPayableCommand(string description, DateOnly dueDate, DateOnly? paymentDate, PaymentMethod paymentMethod, decimal principalAmountValue, decimal interestAmoutValue, decimal amountPaidValue, string category, string notes)
+    public AddPayableCommand(string description, DateOnly dueDate, DateOnly? paymentDate, PaymentMethod paymentMethod, string currencyCode, decimal principalAmountValue, decimal interestAmoutValue, decimal amountPaidValue, string category, string notes)
     {
         Description = description;
         DueDate = dueDate;
         PaymentDate = paymentDate;
         PaymentMethod = paymentMethod;
+        CurrencyCode = currencyCode;
         _principalAmountValue = principalAmountValue;
         _interestAmoutValue = interestAmoutValue;
         _amountPaidValue = amountPaidValue;

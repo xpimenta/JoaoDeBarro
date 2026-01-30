@@ -1,7 +1,7 @@
 using FluentValidation.Results;
 using MediatR;
 
-namespace JoaoDeBarro.BuildingBlocks.Events;
+namespace JoaoDeBarro.BuildingBlocks.Messages;
 
 public abstract class Command : Message, IRequest<bool>
 {

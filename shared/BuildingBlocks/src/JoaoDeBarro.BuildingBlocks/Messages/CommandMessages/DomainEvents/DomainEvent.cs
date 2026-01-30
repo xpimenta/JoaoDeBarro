@@ -1,4 +1,6 @@
-namespace JoaoDeBarro.BuildingBlocks.Events;
+using JoaoDeBarro.BuildingBlocks.Messages;
+
+namespace JoaoDeBarro.BuildingBlocks.Messages.CommandMessages.DomainEvents;
 
 public abstract class DomainEvent : Event
 {

@@ -1,4 +1,4 @@
-namespace JoaoDeBarro.BuildingBlocks.Events;
+namespace JoaoDeBarro.BuildingBlocks.Messages;
 
 public abstract class Message
 {

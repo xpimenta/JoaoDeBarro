@@ -1,4 +1,4 @@
-using JoaoDeBarro.BuildingBlocks.Events;
+using JoaoDeBarro.BuildingBlocks.Messages.CommandMessages.DomainEvents;
 
 namespace JoaoDeBarro.Receivables.Domain.Events;
 

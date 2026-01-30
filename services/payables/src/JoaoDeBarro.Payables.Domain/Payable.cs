@@ -26,8 +26,6 @@ public class Payable : Entity, IAggregateRoot
         CurrencyCode = currencyCode;
         Category = category;
         Notes = notes;
-        
-        
     }
 
     public string CurrencyCode { get; } = "BRL";

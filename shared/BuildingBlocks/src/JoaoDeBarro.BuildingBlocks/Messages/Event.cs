@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace JoaoDeBarro.BuildingBlocks.Events;
+namespace JoaoDeBarro.BuildingBlocks.Messages;
 
 public abstract class Event : Message, INotification
 {
