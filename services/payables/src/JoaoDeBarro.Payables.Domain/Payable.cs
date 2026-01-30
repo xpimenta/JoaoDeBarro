@@ -10,11 +10,26 @@ public class Payable : Entity, IAggregateRoot
     public DateOnly DueDate { get; }
     public DateOnly? PaymentDate { get; }
     public PaymentMethod PaymentMethod { get; }
+    public string Category { get; }
+    public string Notes { get; }
 
     private decimal _principalAmountValue;
     private decimal _interestAmoutValue;
     private decimal _amountPaidValue;
-    
+
+    public Payable(string description, DateOnly dueDate, DateOnly? paymentDate, PaymentMethod paymentMethod, string currencyCode, string category, string notes)
+    {
+        Description = description;
+        DueDate = dueDate;
+        PaymentDate = paymentDate;
+        PaymentMethod = paymentMethod;
+        CurrencyCode = currencyCode;
+        Category = category;
+        Notes = notes;
+        
+        
+    }
+
     public string CurrencyCode { get; } = "BRL";
     public Money PrincipalAmount => Money.Of(_principalAmountValue, CurrencyCode);
     public Money InterestAmount => Money.Of(_interestAmoutValue, CurrencyCode);
@@ -34,8 +49,5 @@ public class Payable : Entity, IAggregateRoot
             return PayableStatus.Open;
         }
     }
-
-    public string Category { get; }
-    public string Notes { get; }
     
 }

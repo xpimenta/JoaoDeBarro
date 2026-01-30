@@ -14,6 +14,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\shared\BuildingBlocks\src\JoaoDeBarro.BuildingBlocks\JoaoDeBarro.BuildingBlocks.csproj" />
       <ProjectReference Include="..\..\..\..\shared\SharedKernel\src\JoaoDeBarro.SharedKernel\JoaoDeBarro.SharedKernel.csproj" />
+      <ProjectReference Include="..\JoaoDeBarro.Payables.Domain\JoaoDeBarro.Payables.Domain.csproj" />
     </ItemGroup>
 
 </Project>
