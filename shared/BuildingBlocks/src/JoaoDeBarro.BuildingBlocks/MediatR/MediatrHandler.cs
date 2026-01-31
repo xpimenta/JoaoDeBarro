@@ -1,4 +1,5 @@
 using JoaoDeBarro.BuildingBlocks.Messages;
+using JoaoDeBarro.BuildingBlocks.Messages.CommandMessages.Notifications;
 using MediatR;
 
 namespace JoaoDeBarro.BuildingBlocks.MediatR;
@@ -23,5 +24,10 @@ public class MediatrHandler : IMediatrHandler
     public async Task<bool> SendCommand<T>(T command) where T : Command
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task PublishNotification<T>(T notification) where T : DomainNotification
+    {
+        await _mediator.Publish(notification);
     }
 }

@@ -1,10 +1,12 @@
+using JoaoDeBarro.BuildingBlocks.MediatR;
 using JoaoDeBarro.BuildingBlocks.Messages;
+using JoaoDeBarro.BuildingBlocks.Messages.CommandMessages.Notifications;
 using JoaoDeBarro.Payables.Domain;
 using MediatR;
 
 namespace JoaoDeBarro.Payables.Application.Commands;
 
-public class PayableHandler(IPayableRepository payableRepository) : IRequestHandler<AddPayableCommand, bool>
+public class PayableCommandHandler(IPayableRepository payableRepository, IMediatrHandler mediatrHandler) : IRequestHandler<AddPayableCommand, bool>
 {
     public async Task<bool> Handle(AddPayableCommand request, CancellationToken cancellationToken)
     {
@@ -20,6 +22,7 @@ public class PayableHandler(IPayableRepository payableRepository) : IRequestHand
                 request.Category,
                 request.Notes
             );
+        payable.SetAmounts(request.PrincipalAmount, request.InterestAmount, request.AmountPaid);
         payableRepository.AddPayable(payable);
         await payableRepository.UnitOfWork.CommitAsync();
         return true;
@@ -30,12 +33,10 @@ public class PayableHandler(IPayableRepository payableRepository) : IRequestHand
     private bool IsValidCommand(Command command)
     {
         if (command.IsValid()) return true;
-
         foreach (var error in command.ValidationResult.Errors)
         {
-         //event   
+            mediatrHandler.PublishNotification(new DomainNotification(this.GetType().Name, error.ErrorMessage));
         }
-
         return false;
     }
 }

@@ -11,22 +11,22 @@ public class AddPayableCommand : Command
     public DateOnly? PaymentDate { get; }
     public PaymentMethod PaymentMethod { get; }
     public string CurrencyCode { get; }
-    public decimal _principalAmountValue { get; }
-    public decimal _interestAmoutValue{ get; }
-    public decimal _amountPaidValue{ get; }
+    public decimal PrincipalAmount { get; }
+    public decimal InterestAmount { get; }
+    public decimal AmountPaid { get; }
     public string Category { get; }
     public string Notes { get; }
 
-    public AddPayableCommand(string description, DateOnly dueDate, DateOnly? paymentDate, PaymentMethod paymentMethod, string currencyCode, decimal principalAmountValue, decimal interestAmoutValue, decimal amountPaidValue, string category, string notes)
+    public AddPayableCommand(string description, DateOnly dueDate, DateOnly? paymentDate, PaymentMethod paymentMethod, string currencyCode, decimal principalAmount, decimal interestAmount, decimal amountPaid, string category, string notes)
     {
         Description = description;
         DueDate = dueDate;
         PaymentDate = paymentDate;
         PaymentMethod = paymentMethod;
         CurrencyCode = currencyCode;
-        _principalAmountValue = principalAmountValue;
-        _interestAmoutValue = interestAmoutValue;
-        _amountPaidValue = amountPaidValue;
+        PrincipalAmount = principalAmount;
+        InterestAmount = interestAmount;
+        AmountPaid = amountPaid;
         Category = category;
         Notes = notes;
     }
@@ -50,7 +50,7 @@ public class AddPayableValidation : AbstractValidator<AddPayableCommand>
             .NotNull()
             .WithMessage("O campo {PropertyName} precisa ser fornecido");
         
-        RuleFor(p => p._principalAmountValue)
+        RuleFor(p => p.PrincipalAmount)
             .GreaterThan(0)
             .WithMessage("O campo {PropertyName} precisa ser maior que 0");
         

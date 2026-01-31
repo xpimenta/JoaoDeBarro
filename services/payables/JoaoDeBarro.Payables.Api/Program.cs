@@ -1,5 +1,12 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using JoaoDeBarro.BuildingBlocks.MediatR;
+using JoaoDeBarro.Payables.Domain;
+using JoaoDeBarro.Payables.Infrastructure;
+using JoaoDeBarro.Payables.Infrastructure.Repositories;
 using JoaoDeBarro.Payables.Application.Commands;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +16,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IRequestHandler<AddPayableCommand, bool>, PayableHandler>();
+builder.Services.AddDbContext<PayableContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddMediatR(typeof(PayableCommandHandler).Assembly);
+builder.Services.AddScoped<IMediatrHandler, MediatrHandler>();
+builder.Services.AddScoped<IPayableRepository, PayableRepository>();
+builder.Services.AddScoped<PayableContext>();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssembly(typeof(AddPayableValidation).Assembly);
 
 var app = builder.Build();
 
