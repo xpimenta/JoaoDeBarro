@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "receivables": "Receivables",
+    "payables": "Payables"
+  },
+  "dashboard": {
+    "title": "Finance",
+    "subtitle": "Financial overview",
+    "kpi": {
+      "receivables": "Receivables",
+      "payables": "Payables",
+      "cashflow": "Cashflow"
+    },
+    "recentReceivables": "Recent receivables",
+    "recentPayables": "Recent payables"
+  },
+  "receivables": {
+    "title": "Receivables",
+    "new": "New receivable",
+    "customer": "Customer",
+    "amount": "Amount",
+    "status": "Status",
+    "form": {
+      "title": "New receivable",
+      "subtitle": "Fill in the transaction details.",
+      "section": {
+        "service": "Service",
+        "invoice": "Document",
+        "amounts": "Amounts"
+      },
+      "customerName": "Customer",
+      "serviceDescription": "Service description",
+      "serviceDate": "Service date",
+      "serviceOrderNumber": "Service order",
+      "invoiceNumber": "Invoice number",
+      "invoiceIssueDate": "Invoice issue date",
+      "dueDate": "Due date",
+      "paymentMethod": "Payment method",
+      "grossAmount": "Gross amount",
+      "issAmount": "ISS",
+      "amountReceived": "Amount received",
+      "currencyCode": "Currency"
+    }
+  },
+  "status": {
+    "open": "Open",
+    "dueToday": "Due today",
+    "overdue": "Overdue",
+    "settled": "Settled"
+  },
+  "validation": {
+    "required": "Required field.",
+    "invoiceNumberRequired": "Invoice number is required.",
+    "invoiceIssueDateRequired": "Invoice issue date is required.",
+    "issGreaterThanGross": "ISS cannot be greater than gross.",
+    "receivedGreaterThanAvailable": "Received cannot exceed available."
+  },
+  "paymentMethod": {
+    "boleto": "Boleto",
+    "debit": "Debit",
+    "credit": "Credit",
+    "deposit": "Deposit",
+    "pix": "Pix"
+  },
+  "common": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "save": "Save",
+    "select": "Select"
+  },
+  "payables": {
+    "title": "Payables",
+    "new": "New payable",
+    "vendor": "Vendor",
+    "amount": "Amount",
+    "status": "Status"
+  }
+}

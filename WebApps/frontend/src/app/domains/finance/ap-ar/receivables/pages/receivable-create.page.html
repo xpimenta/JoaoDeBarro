@@ -1,0 +1,123 @@
+<div class="page-header">
+  <div>
+    <h2>{{ 'receivables.form.title' | translate }}</h2>
+    <p class="muted">{{ 'receivables.form.subtitle' | translate }}</p>
+  </div>
+  <button
+    pButton
+    type="button"
+    class="brand-button ghost"
+    [routerLink]="['/finance/ap-ar/receivables']"
+    label="{{ 'common.back' | translate }}">
+  </button>
+</div>
+
+<form class="form-grid" [formGroup]="form" (ngSubmit)="submit()">
+  <section class="card">
+    <h3>{{ 'receivables.form.section.service' | translate }}</h3>
+    <div class="grid">
+      <label>
+        {{ 'receivables.form.customerName' | translate }}
+        <input pInputText formControlName="customerName" type="text" />
+        <span class="error" *ngIf="form.get('customerName')?.touched && form.get('customerName')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.serviceDescription' | translate }}
+        <input pInputText formControlName="serviceDescription" type="text" />
+        <span class="error" *ngIf="form.get('serviceDescription')?.touched && form.get('serviceDescription')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.serviceDate' | translate }}
+        <input formControlName="serviceDate" type="date" />
+        <span class="error" *ngIf="form.get('serviceDate')?.touched && form.get('serviceDate')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.serviceOrderNumber' | translate }}
+        <input pInputText formControlName="serviceOrderNumber" type="text" />
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>{{ 'receivables.form.section.invoice' | translate }}</h3>
+    <div class="grid">
+      <label>
+        {{ 'receivables.form.invoiceNumber' | translate }}
+        <input pInputText formControlName="invoiceNumber" type="text" />
+        <span class="error" *ngIf="form.touched && form.hasError('invoiceNumberRequired')">
+          {{ 'validation.invoiceNumberRequired' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.invoiceIssueDate' | translate }}
+        <input formControlName="invoiceIssueDate" type="date" />
+        <span class="error" *ngIf="form.touched && form.hasError('invoiceIssueDateRequired')">
+          {{ 'validation.invoiceIssueDateRequired' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.dueDate' | translate }}
+        <input formControlName="dueDate" type="date" />
+        <span class="error" *ngIf="form.get('dueDate')?.touched && form.get('dueDate')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.paymentMethod' | translate }}
+        <p-select
+          [options]="paymentMethods"
+          formControlName="paymentMethod"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="{{ 'common.select' | translate }}">
+        </p-select>
+        <span class="error" *ngIf="form.get('paymentMethod')?.touched && form.get('paymentMethod')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>{{ 'receivables.form.section.amounts' | translate }}</h3>
+    <div class="grid">
+      <label>
+        {{ 'receivables.form.grossAmount' | translate }}
+        <p-inputNumber formControlName="grossAmount" [min]="0" mode="decimal"></p-inputNumber>
+      </label>
+      <label>
+        {{ 'receivables.form.issAmount' | translate }}
+        <p-inputNumber formControlName="issAmount" [min]="0" mode="decimal"></p-inputNumber>
+        <span class="error" *ngIf="form.touched && form.hasError('issGreaterThanGross')">
+          {{ 'validation.issGreaterThanGross' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.amountReceived' | translate }}
+        <p-inputNumber formControlName="amountReceived" [min]="0" mode="decimal"></p-inputNumber>
+        <span class="error" *ngIf="form.touched && form.hasError('receivedGreaterThanAvailable')">
+          {{ 'validation.receivedGreaterThanAvailable' | translate }}
+        </span>
+      </label>
+      <label>
+        {{ 'receivables.form.currencyCode' | translate }}
+        <input pInputText formControlName="currencyCode" type="text" />
+      </label>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button pButton type="button" class="brand-button ghost" [routerLink]="['/finance/ap-ar/receivables']">
+      {{ 'common.cancel' | translate }}
+    </button>
+    <button pButton type="submit" class="brand-button" [disabled]="submitting">
+      {{ 'common.save' | translate }}
+    </button>
+  </div>
+</form>

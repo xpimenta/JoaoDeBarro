@@ -1,0 +1,59 @@
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+:root {
+  --bg: #101010;
+  --bg-soft: #1c1b1b;
+  --surface: #1f1d1d;
+  --panel: #1a1919;
+  --line: #303030;
+  --ink: #f0f0e0;
+  --muted: #c8c2b1;
+  --accent: #c0d030;
+  --accent-2: #a7c020;
+  --accent-soft: #e0f0c0;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.p-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.p-card .p-card-title {
+  color: var(--ink);
+}
+
+.p-datatable {
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: var(--surface);
+  color: var(--muted);
+  border-color: var(--line);
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.p-inputtext {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.p-inputtext:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.1rem rgba(192, 208, 48, 0.25);
+}

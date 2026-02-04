@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h2>{{ 'payables.title' | translate }}</h2>
+  <button pButton type="button" label="{{ 'payables.new' | translate }}" class="brand-button"></button>
+</div>
+
+<p-table [value]="rows" class="p-datatable-sm" [paginator]="true" [rows]="5">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>{{ 'payables.vendor' | translate }}</th>
+      <th>{{ 'payables.amount' | translate }}</th>
+      <th>{{ 'payables.status' | translate }}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>{{ row.vendor }}</td>
+      <td>R$ {{ row.amount }}</td>
+      <td>{{ row.status }}</td>
+    </tr>
+  </ng-template>
+</p-table>

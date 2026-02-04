@@ -1,0 +1,63 @@
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.muted {
+  color: var(--brand-muted);
+  margin: 0.25rem 0 0;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--surface-card);
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 10px 30px rgba(9, 12, 16, 0.08);
+}
+
+.card h3 {
+  margin: 0 0 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+input[type='date'] {
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 0.65rem 0.75rem;
+  background: var(--surface-card);
+  color: var(--text-color);
+}
+
+.error {
+  color: #c2393b;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}

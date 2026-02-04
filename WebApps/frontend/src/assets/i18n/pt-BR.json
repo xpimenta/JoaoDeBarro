@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "receivables": "Recebíveis",
+    "payables": "Pagáveis"
+  },
+  "dashboard": {
+    "title": "Finance",
+    "subtitle": "Visão geral financeira",
+    "kpi": {
+      "receivables": "Recebíveis",
+      "payables": "Pagáveis",
+      "cashflow": "Fluxo"
+    },
+    "recentReceivables": "Recebíveis recentes",
+    "recentPayables": "Pagáveis recentes"
+  },
+  "receivables": {
+    "title": "Recebíveis",
+    "new": "Novo recebível",
+    "customer": "Nome do Cliente",
+    "amount": "Valor",
+    "status": "Status",
+    "form": {
+      "title": "Novo recebível",
+      "subtitle": "Preencha os dados da movimentação.",
+      "section": {
+        "service": "Serviço",
+        "invoice": "Documento",
+        "amounts": "Valores"
+      },
+      "customerName": "Cliente",
+      "serviceDescription": "Descrição do serviço",
+      "serviceDate": "Data do serviço",
+      "serviceOrderNumber": "Ordem de serviço",
+      "invoiceNumber": "Número da nota",
+      "invoiceIssueDate": "Emissão da nota",
+      "dueDate": "Vencimento",
+      "paymentMethod": "Forma de pagamento",
+      "grossAmount": "Valor bruto",
+      "issAmount": "ISS",
+      "amountReceived": "Valor recebido",
+      "currencyCode": "Moeda"
+    }
+  },
+  "status": {
+    "open": "Em aberto",
+    "dueToday": "Vence hoje",
+    "overdue": "Em atraso",
+    "settled": "Liquidado"
+  },
+  "validation": {
+    "required": "Campo obrigatório.",
+    "invoiceNumberRequired": "Informe o número da nota.",
+    "invoiceIssueDateRequired": "Informe a data de emissão.",
+    "issGreaterThanGross": "O ISS não pode ser maior que o bruto.",
+    "receivedGreaterThanAvailable": "O recebido não pode ser maior que o disponível."
+  },
+  "paymentMethod": {
+    "boleto": "Boleto",
+    "debit": "Débito",
+    "credit": "Crédito",
+    "deposit": "Depósito",
+    "pix": "Pix"
+  },
+  "common": {
+    "back": "Voltar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "select": "Selecione"
+  },
+  "payables": {
+    "title": "Pagáveis",
+    "new": "Novo pagável",
+    "vendor": "Fornecedor",
+    "amount": "Valor",
+    "status": "Status"
+  }
+}
