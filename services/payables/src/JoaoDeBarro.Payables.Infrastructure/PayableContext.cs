@@ -1,4 +1,5 @@
 using JoaoDeBarro.BuildingBlocks.DomainObjects.Data;
+using JoaoDeBarro.BuildingBlocks.Messages;
 using JoaoDeBarro.Payables.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ public class PayableContext : DbContext, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PayableContext).Assembly);
-
+        modelBuilder.Ignore<Event>();
         foreach (var property in modelBuilder.Model
                      .GetEntityTypes()
                      .SelectMany(e => e.GetProperties())

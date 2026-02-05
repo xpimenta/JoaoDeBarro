@@ -1,12 +1,32 @@
+using JoaoDeBarro.BuildingBlocks.Messages;
+
 namespace JoaoDeBarro.BuildingBlocks.DomainObjects;
 
 public abstract class Entity
 {
     public Guid Id { get; set; }
 
+    private List<Event> _events;
+    public IReadOnlyCollection<Event> Events => _events?.AsReadOnly();
     protected Entity()
     {
         Id = Guid.NewGuid();
+    }
+
+    public void AddEvent(Event @event)
+    {
+        _events = _events ?? new List<Event>();
+        _events.Add(@event);
+    }
+
+    public void RemoveEvent(Event @event)
+    {
+        _events?.Remove(@event);
+    }
+
+    public void ClearEvents()
+    {
+        _events?.Clear();
     }
 
     public override bool Equals(object obj)
