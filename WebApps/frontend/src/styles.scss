@@ -1,59 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap');
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 
 :root {
-  --bg: #101010;
-  --bg-soft: #1c1b1b;
-  --surface: #1f1d1d;
-  --panel: #1a1919;
-  --line: #303030;
-  --ink: #f0f0e0;
-  --muted: #c8c2b1;
-  --accent: #c0d030;
-  --accent-2: #a7c020;
-  --accent-soft: #e0f0c0;
+  --brand-900: #1e4a2a;
+  --brand-700: #2b6a3b;
+  --brand-500: #3f8a4f;
+  --brand-300: #c4dec9;
+  --brand-100: #eef5ef;
+  --accent-500: #d3a741;
+  --accent-200: #f3e5be;
+
+  --bg: #f5f8f3;
+  --bg-soft: #edf3e9;
+  --surface: #ffffff;
+  --surface-soft: #f8fbf6;
+  --line: #d9e4d4;
+
+  --ink: #1f2e23;
+  --muted: #647366;
+  --positive: #2f8f54;
+  --negative: #c04646;
+
+  --shadow-soft: 0 10px 32px rgba(24, 35, 25, 0.06);
+  --radius-lg: 20px;
+  --radius-md: 14px;
 }
 
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
 
 body {
-  background: var(--bg);
+  font-family: 'Manrope', sans-serif;
   color: var(--ink);
+  background:
+    radial-gradient(circle at 0 0, #dcebd9 0%, transparent 42%),
+    radial-gradient(circle at 100% 0, #eef4de 0%, transparent 35%),
+    linear-gradient(180deg, #f8fbf7 0%, #f1f6ee 100%);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Sora', sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+}
+
+/* PrimeNG - Surface */
+.p-card,
+.p-datatable,
+.p-select,
+.p-inputtext,
+.p-inputnumber-input,
+.p-paginator {
+  border-radius: var(--radius-md);
 }
 
 .p-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  color: var(--ink);
-}
-
-.p-card .p-card-title {
+  box-shadow: var(--shadow-soft);
   color: var(--ink);
 }
 
 .p-datatable {
-  background: var(--panel);
-  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .p-datatable .p-datatable-thead > tr > th {
-  background: var(--surface);
+  background: var(--surface-soft);
   color: var(--muted);
   border-color: var(--line);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.95rem 1rem;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background: var(--surface);
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: #f4f9f2;
 }
 
 .p-datatable .p-datatable-tbody > tr > td {
   border-color: var(--line);
   color: var(--ink);
+  padding: 0.95rem 1rem;
 }
 
-.p-inputtext {
-  background: var(--panel);
+.p-inputtext,
+.p-inputnumber-input,
+.p-select {
+  background: var(--surface);
   border: 1px solid var(--line);
   color: var(--ink);
+  min-height: 2.8rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.p-inputtext:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 0.1rem rgba(192, 208, 48, 0.25);
+.p-inputtext:enabled:hover,
+.p-inputnumber-input:hover,
+.p-select:hover {
+  border-color: #c3d2be;
+}
+
+.p-inputtext:enabled:focus,
+.p-inputnumber-input:focus,
+.p-select.p-focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 0.2rem rgba(63, 138, 79, 0.16);
+}
+
+.p-button {
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.brand-button.p-button,
+.brand-button {
+  background: linear-gradient(120deg, var(--brand-700), var(--brand-500)) !important;
+  border: none !important;
+  color: #f7fff8 !important;
+  box-shadow: 0 12px 28px rgba(43, 106, 59, 0.28);
+}
+
+.brand-button.p-button:hover,
+.brand-button:hover {
+  background: linear-gradient(120deg, var(--brand-900), var(--brand-700)) !important;
+}
+
+.brand-button.ghost.p-button,
+.brand-button.ghost {
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: none !important;
+}
+
+.brand-button.ghost.p-button:hover,
+.brand-button.ghost:hover {
+  background: #f2f8ef !important;
+}
+
+.p-paginator {
+  background: var(--surface-soft);
+  border-top: 1px solid var(--line);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+}
+
+.status-chip::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.status-chip--open {
+  color: #8d6b1a;
+  background: #fdf4d8;
+}
+
+.status-chip--due {
+  color: #b3551d;
+  background: #fce9dd;
+}
+
+.status-chip--overdue {
+  color: #b83f3f;
+  background: #fde1e1;
+}
+
+.status-chip--settled {
+  color: #2b7a4b;
+  background: #dff3e6;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.2rem;
+}
+
+@keyframes rise-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [CommonModule, CardModule, TableModule, TranslateModule],
+  imports: [CommonModule, TableModule, TranslateModule],
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss'
 })
@@ -25,4 +24,15 @@ export class DashboardPage {
     { vendor: 'Fornecedor C', amount: 260, status: 'Em atraso' },
     { vendor: 'Fornecedor D', amount: 640, status: 'Aberto' }
   ];
+
+  chipClass(status: string): string {
+    switch (status) {
+      case 'Pago':
+        return 'status-chip status-chip--settled';
+      case 'Em atraso':
+        return 'status-chip status-chip--overdue';
+      default:
+        return 'status-chip status-chip--open';
+    }
+  }
 }

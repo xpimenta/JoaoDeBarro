@@ -1,27 +1,33 @@
 <div class="page-header">
-  <h2>{{ 'receivables.title' | translate }}</h2>
+  <div>
+    <h2>{{ 'receivables.title' | translate }}</h2>
+    <p class="subtitle">{{ 'receivables.subtitle' | translate }}</p>
+  </div>
   <button
     pButton
     type="button"
     [routerLink]="['/finance/ap-ar/receivables/new']"
+    icon="pi pi-plus"
     label="{{ 'receivables.new' | translate }}"
     class="brand-button">
   </button>
 </div>
 
-<p-table [value]="(rows$ | async) ?? []" class="p-datatable-sm" [paginator]="true" [rows]="5">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>{{ 'receivables.customer' | translate }}</th>
-      <th>{{ 'receivables.amount' | translate }}</th>
-      <th>{{ 'receivables.status' | translate }}</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-row>
-    <tr>
-      <td>{{ row.customerName }}</td>
-      <td>R$ {{ row.grossAmount }}</td>
-      <td>{{ statusKey(row.status) | translate }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+<section class="panel">
+  <p-table [value]="(rows$ | async) ?? []" class="p-datatable-sm" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{ 'receivables.customer' | translate }}</th>
+        <th>{{ 'receivables.amount' | translate }}</th>
+        <th>{{ 'receivables.status' | translate }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>{{ row.customerName }}</td>
+        <td>R$ {{ row.grossAmount }}</td>
+        <td><span [class]="statusClass(row.status)">{{ statusKey(row.status) | translate }}</span></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</section>

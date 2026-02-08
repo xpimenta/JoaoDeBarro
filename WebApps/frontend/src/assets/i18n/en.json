@@ -4,6 +4,13 @@
     "receivables": "Receivables",
     "payables": "Payables"
   },
+  "shell": {
+    "quickAction": "New entry",
+    "note": {
+      "title": "Financial workspace focused on operational clarity.",
+      "subtitle": "Updated with a light and minimalist interface."
+    }
+  },
   "dashboard": {
     "title": "Finance",
     "subtitle": "Financial overview",
@@ -17,6 +24,7 @@
   },
   "receivables": {
     "title": "Receivables",
+    "subtitle": "Track open invoices, due dates and settlements.",
     "new": "New receivable",
     "customer": "Customer",
     "amount": "Amount",
@@ -71,6 +79,7 @@
   },
   "payables": {
     "title": "Payables",
+    "subtitle": "Centralize obligations and prevent late payments.",
     "new": "New payable",
     "vendor": "Vendor",
     "amount": "Amount",

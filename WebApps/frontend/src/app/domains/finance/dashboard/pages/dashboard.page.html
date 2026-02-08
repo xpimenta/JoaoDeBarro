@@ -1,23 +1,37 @@
 <section class="cards">
-  <p-card class="kpi">
-    <ng-template pTemplate="title">{{ 'dashboard.kpi.receivables' | translate }}</ng-template>
-    <div class="value">R$ 128.450</div>
-    <small>+12% vs mês anterior</small>
-  </p-card>
-  <p-card class="kpi">
-    <ng-template pTemplate="title">{{ 'dashboard.kpi.payables' | translate }}</ng-template>
-    <div class="value">R$ 89.230</div>
-    <small>-3% vs mês anterior</small>
-  </p-card>
-  <p-card class="kpi">
-    <ng-template pTemplate="title">{{ 'dashboard.kpi.cashflow' | translate }}</ng-template>
-    <div class="value">R$ 39.220</div>
-    <small>Saldo previsto</small>
-  </p-card>
+  <article class="kpi kpi--receivables">
+    <div class="kpi__head">
+      <span>{{ 'dashboard.kpi.receivables' | translate }}</span>
+      <i class="pi pi-arrow-up-right"></i>
+    </div>
+    <strong class="kpi__value">R$ 128.450</strong>
+    <small class="kpi__trend positive">+12% vs mês anterior</small>
+  </article>
+
+  <article class="kpi kpi--payables">
+    <div class="kpi__head">
+      <span>{{ 'dashboard.kpi.payables' | translate }}</span>
+      <i class="pi pi-arrow-down-right"></i>
+    </div>
+    <strong class="kpi__value">R$ 89.230</strong>
+    <small class="kpi__trend neutral">-3% vs mês anterior</small>
+  </article>
+
+  <article class="kpi kpi--cashflow">
+    <div class="kpi__head">
+      <span>{{ 'dashboard.kpi.cashflow' | translate }}</span>
+      <i class="pi pi-chart-line"></i>
+    </div>
+    <strong class="kpi__value">R$ 39.220</strong>
+    <small class="kpi__trend positive">Saldo previsto</small>
+  </article>
 </section>
 
 <section class="panel">
-  <h2>{{ 'dashboard.recentReceivables' | translate }}</h2>
+  <header class="panel-head">
+    <h2>{{ 'dashboard.recentReceivables' | translate }}</h2>
+    <small>Últimas movimentações</small>
+  </header>
   <p-table [value]="receivables" class="p-datatable-sm" [rows]="4">
     <ng-template pTemplate="header">
       <tr>
@@ -30,14 +44,17 @@
       <tr>
         <td>{{ row.customer }}</td>
         <td>R$ {{ row.amount }}</td>
-        <td>{{ row.status }}</td>
+        <td><span [class]="chipClass(row.status)">{{ row.status }}</span></td>
       </tr>
     </ng-template>
   </p-table>
 </section>
 
 <section class="panel">
-  <h2>{{ 'dashboard.recentPayables' | translate }}</h2>
+  <header class="panel-head">
+    <h2>{{ 'dashboard.recentPayables' | translate }}</h2>
+    <small>Últimas movimentações</small>
+  </header>
   <p-table [value]="payables" class="p-datatable-sm" [rows]="4">
     <ng-template pTemplate="header">
       <tr>
@@ -50,7 +67,7 @@
       <tr>
         <td>{{ row.vendor }}</td>
         <td>R$ {{ row.amount }}</td>
-        <td>{{ row.status }}</td>
+        <td><span [class]="chipClass(row.status)">{{ row.status }}</span></td>
       </tr>
     </ng-template>
   </p-table>

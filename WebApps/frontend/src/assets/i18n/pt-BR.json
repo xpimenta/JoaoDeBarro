@@ -4,6 +4,13 @@
     "receivables": "Recebíveis",
     "payables": "Pagáveis"
   },
+  "shell": {
+    "quickAction": "Novo lançamento",
+    "note": {
+      "title": "Ambiente financeiro com foco em clareza operacional.",
+      "subtitle": "Atualizado para uma UI light e minimalista."
+    }
+  },
   "dashboard": {
     "title": "Finance",
     "subtitle": "Visão geral financeira",
@@ -17,6 +24,7 @@
   },
   "receivables": {
     "title": "Recebíveis",
+    "subtitle": "Acompanhe faturas em aberto, vencimentos e liquidações.",
     "new": "Novo recebível",
     "customer": "Nome do Cliente",
     "amount": "Valor",
@@ -71,6 +79,7 @@
   },
   "payables": {
     "title": "Pagáveis",
+    "subtitle": "Centralize obrigações e previna pagamentos em atraso.",
     "new": "Novo pagável",
     "vendor": "Fornecedor",
     "amount": "Valor",

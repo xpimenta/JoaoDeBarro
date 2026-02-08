@@ -4,15 +4,29 @@
       <span class="brand__mark">JdB</span>
       <div class="brand__text">
         <strong>JoaoDeBarro</strong>
-        <small>Finance Ops</small>
+        <small>Finance Hub</small>
       </div>
     </div>
 
     <nav class="nav">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'nav.dashboard' | translate }}</a>
-      <a routerLink="/finance/ap-ar/receivables" routerLinkActive="active">{{ 'nav.receivables' | translate }}</a>
-      <a routerLink="/finance/ap-ar/payables" routerLinkActive="active">{{ 'nav.payables' | translate }}</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="pi pi-chart-line"></i>
+        <span>{{ 'nav.dashboard' | translate }}</span>
+      </a>
+      <a routerLink="/finance/ap-ar/receivables" routerLinkActive="active">
+        <i class="pi pi-wallet"></i>
+        <span>{{ 'nav.receivables' | translate }}</span>
+      </a>
+      <a routerLink="/finance/ap-ar/payables" routerLinkActive="active">
+        <i class="pi pi-file-edit"></i>
+        <span>{{ 'nav.payables' | translate }}</span>
+      </a>
     </nav>
+
+    <div class="sidebar-note">
+      <p>{{ 'shell.note.title' | translate }}</p>
+      <small>{{ 'shell.note.subtitle' | translate }}</small>
+    </div>
   </aside>
 
   <main class="content">
@@ -21,9 +35,13 @@
         <h1>{{ 'dashboard.title' | translate }}</h1>
         <p>{{ 'dashboard.subtitle' | translate }}</p>
       </div>
-      <button pButton type="button" label="Novo lançamento" class="brand-button"></button>
+      <div class="topbar-actions">
+        <button pButton type="button" icon="pi pi-plus" label="{{ 'shell.quickAction' | translate }}" class="brand-button"></button>
+      </div>
     </header>
 
-    <router-outlet />
+    <section class="content-shell">
+      <router-outlet />
+    </section>
   </main>
 </div>

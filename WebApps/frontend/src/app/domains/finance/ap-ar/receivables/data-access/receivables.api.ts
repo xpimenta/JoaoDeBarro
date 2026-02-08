@@ -6,7 +6,7 @@ import { ReceivableDto } from "../models/receivable.dto";
 @Injectable({providedIn: 'root'})
 export class ReceivableApi{
     private http = inject(HttpClient);
-    private baseUrl = 'https://localhost:7108/api/Receivables';
+    private baseUrl = 'http://localhost:5125/api/Receivables';
 
     getAll(): Observable<ReceivableDto[]>{
         return this.http.get<ReceivableDto[]>(this.baseUrl);

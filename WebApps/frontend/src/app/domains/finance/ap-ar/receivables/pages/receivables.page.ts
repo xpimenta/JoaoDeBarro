@@ -38,15 +38,16 @@ export class ReceivablesPage {
     }
   }
 
-  // rows = [
-  //   { customer: 'Sidone', amount: 725, status: 'Pago' },
-  //   { customer: 'ACME', amount: 420, status: 'Aberto' },
-  //   { customer: 'Barros', amount: 980, status: 'Em atraso' }
-  // ];
-
-
-
-  
-
-
+  statusClass(status?: string): string {
+    switch (status) {
+      case 'DueToday':
+        return 'status-chip status-chip--due';
+      case 'Overdue':
+        return 'status-chip status-chip--overdue';
+      case 'Settled':
+        return 'status-chip status-chip--settled';
+      default:
+        return 'status-chip status-chip--open';
+    }
+  }
 }

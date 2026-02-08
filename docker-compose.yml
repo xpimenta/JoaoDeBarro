@@ -16,5 +16,48 @@ services:
       timeout: 5s
       retries: 20
 
+  payables-api:
+    container_name: jdb-payables-api
+    build:
+      context: .
+      dockerfile: services/payables/JoaoDeBarro.Payables.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=${JDB_PAYABLES_DB:-JoaoDeBarroPayablesDb};User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;Encrypt=True"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    ports:
+      - "5032:8080"
+
+  receivables-api:
+    container_name: jdb-receivables-api
+    build:
+      context: .
+      dockerfile: services/receivables/src/JoaoDeBarro.Receivables.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=${JDB_DB:-JoaoDeBarroDb};User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;Encrypt=True"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    ports:
+      - "5125:8080"
+
+  frontend:
+    container_name: jdb-frontend
+    build:
+      context: WebApps/frontend
+      dockerfile: Dockerfile
+    depends_on:
+      receivables-api:
+        condition: service_started
+      payables-api:
+        condition: service_started
+    ports:
+      - "4200:80"
+
 volumes:
   jdb_sql_data:

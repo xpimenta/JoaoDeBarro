@@ -1,21 +1,26 @@
 <div class="page-header">
-  <h2>{{ 'payables.title' | translate }}</h2>
-  <button pButton type="button" label="{{ 'payables.new' | translate }}" class="brand-button"></button>
+  <div>
+    <h2>{{ 'payables.title' | translate }}</h2>
+    <p class="subtitle">{{ 'payables.subtitle' | translate }}</p>
+  </div>
+  <button pButton type="button" icon="pi pi-plus" label="{{ 'payables.new' | translate }}" class="brand-button"></button>
 </div>
 
-<p-table [value]="rows" class="p-datatable-sm" [paginator]="true" [rows]="5">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>{{ 'payables.vendor' | translate }}</th>
-      <th>{{ 'payables.amount' | translate }}</th>
-      <th>{{ 'payables.status' | translate }}</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-row>
-    <tr>
-      <td>{{ row.vendor }}</td>
-      <td>R$ {{ row.amount }}</td>
-      <td>{{ row.status }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+<section class="panel">
+  <p-table [value]="rows" class="p-datatable-sm" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{ 'payables.vendor' | translate }}</th>
+        <th>{{ 'payables.amount' | translate }}</th>
+        <th>{{ 'payables.status' | translate }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>{{ row.vendor }}</td>
+        <td>R$ {{ row.amount }}</td>
+        <td><span [class]="statusClass(row.status)">{{ row.status }}</span></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</section>

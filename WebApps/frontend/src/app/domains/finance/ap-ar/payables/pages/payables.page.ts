@@ -17,4 +17,15 @@ export class PayablesPage {
     { vendor: 'Fornecedor B', amount: 1500, status: 'Pago' },
     { vendor: 'Fornecedor C', amount: 260, status: 'Em atraso' }
   ];
+
+  statusClass(status: string): string {
+    switch (status) {
+      case 'Pago':
+        return 'status-chip status-chip--settled';
+      case 'Em atraso':
+        return 'status-chip status-chip--overdue';
+      default:
+        return 'status-chip status-chip--open';
+    }
+  }
 }
