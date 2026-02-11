@@ -1,0 +1,252 @@
+<p-table
+  styleClass="p-datatable-sm receivables-table"
+  [value]="rows"
+  [sortField]="'dueDate'"
+  [sortOrder]="1"
+  [paginator]="hasPagination(rows.length)"
+  [rows]="pageSize"
+  [rowsPerPageOptions]="[10, 20, 50]"
+  [scrollable]="true"
+  scrollDirection="horizontal"
+  (onSort)="onTableSort($event)"
+  (onFilter)="onTableFilter($event)"
+  [tableStyle]="{ 'min-width': '980px' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="customerName" [ngClass]="headerClass('customerName')">
+        <div class="head-cell">
+          <span>{{ 'receivables.customer' | translate }}</span>
+          <div class="head-cell__actions">
+            <span [ngClass]="sortIconClass('customerName')">
+              <p-sortIcon field="customerName"></p-sortIcon>
+            </span>
+          </div>
+        </div>
+      </th>
+      <th pSortableColumn="serviceDescription" [ngClass]="headerClass('serviceDescription')">
+        <div class="head-cell">
+          <span>{{ 'receivables.list.service' | translate }}</span>
+          <div class="head-cell__actions">
+            <span class="head-filter-badge" *ngIf="activeFilterCount('serviceDescription') > 0">
+              {{ activeFilterCount('serviceDescription') }}
+            </span>
+            <span [ngClass]="sortIconClass('serviceDescription')">
+              <p-sortIcon field="serviceDescription"></p-sortIcon>
+            </span>
+            <p-columnFilter
+              field="serviceDescription"
+              display="menu"
+              matchMode="in"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showMatchModes]="false"
+              [showApplyButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-listbox
+                  [ngModel]="value"
+                  [options]="serviceOptions"
+                  [multiple]="true"
+                  [checkbox]="true"
+                  [metaKeySelection]="false"
+                  [filter]="true"
+                  [showToggleAll]="false"
+                  optionLabel="label"
+                  optionValue="value"
+                  [scrollHeight]="'14rem'"
+                  styleClass="column-filter-listbox"
+                  (onChange)="filter($event.value ?? null)">
+                </p-listbox>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </div>
+      </th>
+      <th pSortableColumn="dueDate" [ngClass]="headerClass('dueDate')">
+        <div class="head-cell">
+          <span>{{ 'receivables.list.dueDate' | translate }}</span>
+          <div class="head-cell__actions">
+            <span class="head-filter-badge" *ngIf="activeFilterCount('dueDate') > 0">
+              {{ activeFilterCount('dueDate') }}
+            </span>
+            <span [ngClass]="sortIconClass('dueDate')">
+              <p-sortIcon field="dueDate"></p-sortIcon>
+            </span>
+            <p-columnFilter
+              field="dueDate"
+              display="menu"
+              matchMode="in"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showMatchModes]="false"
+              [showApplyButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-listbox
+                  [ngModel]="value"
+                  [options]="dueDateOptions"
+                  [multiple]="true"
+                  [checkbox]="true"
+                  [metaKeySelection]="false"
+                  [filter]="true"
+                  [showToggleAll]="false"
+                  optionLabel="label"
+                  optionValue="value"
+                  [scrollHeight]="'14rem'"
+                  styleClass="column-filter-listbox"
+                  (onChange)="filter($event.value ?? null)">
+                </p-listbox>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </div>
+      </th>
+      <th pSortableColumn="paymentMethod" [ngClass]="headerClass('paymentMethod')">
+        <div class="head-cell">
+          <span>{{ 'receivables.list.paymentMethod' | translate }}</span>
+          <div class="head-cell__actions">
+            <span class="head-filter-badge" *ngIf="activeFilterCount('paymentMethod') > 0">
+              {{ activeFilterCount('paymentMethod') }}
+            </span>
+            <span [ngClass]="sortIconClass('paymentMethod')">
+              <p-sortIcon field="paymentMethod"></p-sortIcon>
+            </span>
+            <p-columnFilter
+              field="paymentMethod"
+              display="menu"
+              matchMode="in"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showMatchModes]="false"
+              [showApplyButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-listbox
+                  [ngModel]="value"
+                  [options]="paymentMethodOptions"
+                  [multiple]="true"
+                  [checkbox]="true"
+                  [metaKeySelection]="false"
+                  [filter]="true"
+                  [showToggleAll]="false"
+                  optionLabel="label"
+                  optionValue="value"
+                  [scrollHeight]="'14rem'"
+                  styleClass="column-filter-listbox"
+                  (onChange)="filter($event.value ?? null)">
+                </p-listbox>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </div>
+      </th>
+      <th class="text-right" pSortableColumn="grossAmount" [ngClass]="headerClass('grossAmount')">
+        <div class="head-cell head-cell--end">
+          <span>{{ 'receivables.list.grossAmount' | translate }}</span>
+          <div class="head-cell__actions">
+            <span [ngClass]="sortIconClass('grossAmount')">
+              <p-sortIcon field="grossAmount"></p-sortIcon>
+            </span>
+          </div>
+        </div>
+      </th>
+      <th class="text-right" pSortableColumn="amountReceived" [ngClass]="headerClass('amountReceived')">
+        <div class="head-cell head-cell--end">
+          <span>{{ 'receivables.list.amountReceived' | translate }}</span>
+          <div class="head-cell__actions">
+            <span [ngClass]="sortIconClass('amountReceived')">
+              <p-sortIcon field="amountReceived"></p-sortIcon>
+            </span>
+          </div>
+        </div>
+      </th>
+      <th class="text-right" pSortableColumn="outstandingAmount" [ngClass]="headerClass('outstandingAmount')">
+        <div class="head-cell head-cell--end">
+          <span>{{ 'receivables.list.outstandingAmount' | translate }}</span>
+          <div class="head-cell__actions">
+            <span [ngClass]="sortIconClass('outstandingAmount')">
+              <p-sortIcon field="outstandingAmount"></p-sortIcon>
+            </span>
+          </div>
+        </div>
+      </th>
+      <th pSortableColumn="status" [ngClass]="headerClass('status', 'statusNormalized')">
+        <div class="head-cell">
+          <span>{{ 'receivables.status' | translate }}</span>
+          <div class="head-cell__actions">
+            <span class="head-filter-badge" *ngIf="activeFilterCount('statusNormalized') > 0">
+              {{ activeFilterCount('statusNormalized') }}
+            </span>
+            <span [ngClass]="sortIconClass('status')">
+              <p-sortIcon field="status"></p-sortIcon>
+            </span>
+            <p-columnFilter
+              field="statusNormalized"
+              display="menu"
+              matchMode="in"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showMatchModes]="false"
+              [showApplyButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-listbox
+                  [ngModel]="value"
+                  [options]="statusOptions"
+                  [multiple]="true"
+                  [checkbox]="true"
+                  [metaKeySelection]="false"
+                  [filter]="false"
+                  [showToggleAll]="false"
+                  optionLabel="label"
+                  optionValue="value"
+                  [scrollHeight]="'14rem'"
+                  styleClass="column-filter-listbox"
+                  (onChange)="filter($event.value ?? null)">
+                </p-listbox>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </div>
+      </th>
+      <th class="actions-head">{{ 'receivables.list.actions' | translate }}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td class="nowrap strong">{{ row.customerName || '-' }}</td>
+      <td class="nowrap">{{ row.serviceDescription || '-' }}</td>
+      <td class="nowrap">{{ formatDate(row.dueDate) }}</td>
+      <td class="nowrap">{{ paymentMethodLabel(row.paymentMethod) }}</td>
+      <td class="text-right nowrap">{{ formatMoney(row.grossAmount, row.currencyCode) }}</td>
+      <td class="text-right nowrap">{{ formatMoney(row.amountReceived, row.currencyCode) }}</td>
+      <td class="text-right nowrap">{{ formatMoney(outstandingAmountValue(row), row.currencyCode) }}</td>
+      <td><span [class]="statusClass(row.status)">{{ statusKey(row.status) | translate }}</span></td>
+      <td class="actions-cell">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-eye"
+          class="p-button-text p-button-rounded p-button-sm icon-action"
+          [attr.aria-label]="'receivables.list.details' | translate"
+          (click)="openDetails.emit(row)">
+        </button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-pencil"
+          class="p-button-text p-button-rounded p-button-sm icon-action"
+          [attr.aria-label]="'receivables.list.edit' | translate"
+          [disabled]="!canEdit(row)"
+          (click)="editRow.emit(row)">
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="9" class="empty-row">
+        <div class="table-state table-state--empty">
+          <strong class="state-title">{{ emptyStateTitleKey() | translate }}</strong>
+          <span class="state-subtitle">{{ emptyStateSubtitleKey() | translate }}</span>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

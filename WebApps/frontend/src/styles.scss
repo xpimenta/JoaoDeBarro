@@ -214,6 +214,376 @@ a {
   padding: 1.2rem;
 }
 
+/* Receivables dialog lives under body via appendTo, so styles must be global. */
+.receivables-dialog-mask {
+  background: rgba(40, 66, 49, 0.24) !important;
+  backdrop-filter: blur(1.5px);
+}
+
+.p-dialog.receivables-dialog {
+  --modal-ink: #2b3c30;
+  --modal-muted: #556759;
+  --modal-line: #d2dfd0;
+  --modal-surface: #f2f7f0;
+  color: var(--modal-ink);
+  border: 1px solid var(--modal-line);
+  background: var(--modal-surface);
+  box-shadow: 0 26px 64px rgba(22, 35, 27, 0.22);
+}
+
+.p-dialog.receivables-dialog .p-dialog-header {
+  border-bottom: 1px solid var(--modal-line);
+  background: #ecf4e9;
+  color: var(--modal-ink);
+}
+
+.p-dialog.receivables-dialog .p-dialog-title {
+  color: var(--modal-ink);
+}
+
+.p-dialog.receivables-dialog .p-dialog-header-icon {
+  color: #5f7466;
+}
+
+.p-dialog.receivables-dialog .p-dialog-content {
+  background: var(--modal-surface);
+  color: var(--modal-ink);
+}
+
+.p-dialog.receivables-dialog .p-dialog-footer {
+  border-top: 1px solid var(--modal-line);
+  background: var(--modal-surface);
+}
+
+.p-dialog.receivables-dialog .details-section {
+  border: 1px solid var(--modal-line);
+  background: #ffffff;
+}
+
+.p-dialog.receivables-dialog .details-section h4 {
+  color: var(--modal-ink);
+}
+
+.p-dialog.receivables-dialog .detail-row span {
+  color: var(--modal-muted);
+}
+
+.p-dialog.receivables-dialog .detail-row strong {
+  color: var(--modal-ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+app-receivables-page .table-panel {
+  display: grid;
+  gap: 0.75rem;
+}
+
+app-receivables-page .quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+app-receivables-page .quick-filters--toolbar {
+  flex: 1 1 28rem;
+  min-width: 18rem;
+}
+
+app-receivables-page .quick-filter {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 0.45rem;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  border-radius: 999px;
+  min-height: 2.2rem;
+  padding: 0.35rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.14s ease;
+}
+
+app-receivables-page .quick-filter:hover {
+  transform: translateY(-1px);
+}
+
+app-receivables-page .quick-filter small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(32, 48, 37, 0.08);
+}
+
+app-receivables-page .quick-filter.is-active {
+  box-shadow: 0 0 0 3px rgba(95, 138, 103, 0.14);
+}
+
+app-receivables-page .quick-filter:focus-visible {
+  outline: 2px solid #6a9572;
+  outline-offset: 2px;
+}
+
+app-receivables-page .quick-filter--neutral {
+  border-color: #d6e3d5;
+  background: #f8fbf7;
+}
+
+app-receivables-page .quick-filter--neutral.is-active {
+  border-color: #8faf94;
+  background: #edf6ea;
+}
+
+app-receivables-page .quick-filter--overdue {
+  border-color: #efc6c6;
+  background: #fff6f6;
+  color: #a54545;
+}
+
+app-receivables-page .quick-filter--overdue small {
+  background: #f6dede;
+  color: #9f3f3f;
+}
+
+app-receivables-page .quick-filter--overdue.is-active {
+  border-color: #de9a9a;
+  background: #fdecec;
+}
+
+app-receivables-page .quick-filter--due {
+  border-color: #efd5ba;
+  background: #fff9f2;
+  color: #a35f1c;
+}
+
+app-receivables-page .quick-filter--due small {
+  background: #f8e8d8;
+  color: #92511b;
+}
+
+app-receivables-page .quick-filter--due.is-active {
+  border-color: #d9af7e;
+  background: #fff0dd;
+}
+
+app-receivables-page .quick-filter--open {
+  border-color: #e0d4aa;
+  background: #fffdf3;
+  color: #7f6a1f;
+}
+
+app-receivables-page .quick-filter--open small {
+  background: #f5ecc8;
+  color: #705b1a;
+}
+
+app-receivables-page .quick-filter--open.is-active {
+  border-color: #c8b26a;
+  background: #fff6d8;
+}
+
+app-receivables-page .quick-filter--next {
+  border-color: #cedbc4;
+  background: #f8fcf4;
+  color: #4f7152;
+}
+
+app-receivables-page .quick-filter--next small {
+  background: #e5efdd;
+  color: #3f5f43;
+}
+
+app-receivables-page .quick-filter--next.is-active {
+  border-color: #9fbd96;
+  background: #eef8e8;
+}
+
+app-receivables-page .quick-filter--settled {
+  border-color: #b8dcc4;
+  background: #f3fcf6;
+  color: #2d7246;
+}
+
+app-receivables-page .quick-filter--settled small {
+  background: #ddf2e4;
+  color: #1f6441;
+}
+
+app-receivables-page .quick-filter--settled.is-active {
+  border-color: #84b997;
+  background: #e8f8ed;
+}
+
+app-receivables-page .table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+app-receivables-page .search-field {
+  flex: 0 1 18rem;
+}
+
+app-receivables-page .filter-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  border-radius: 12px;
+  min-height: 2.35rem;
+  padding: 0 0.7rem;
+}
+
+app-receivables-page .filter-field i {
+  color: #7b8f7f;
+  font-size: 0.86rem;
+}
+
+app-receivables-page .filter-field input,
+app-receivables-page .filter-field select {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.84rem;
+  min-height: 2rem;
+}
+
+app-receivables-page .filter-field input {
+  min-width: 0;
+  width: 100%;
+}
+
+app-receivables-page .filter-field select {
+  min-width: 170px;
+  cursor: pointer;
+}
+
+app-receivables-page .filter-field input::placeholder {
+  color: #8fa092;
+}
+
+app-receivables-page .filter-field:focus-within {
+  border-color: #98b39d;
+  box-shadow: 0 0 0 3px rgba(95, 138, 103, 0.16);
+}
+
+app-receivables-page .filter-reset {
+  min-height: 2.35rem;
+}
+
+app-receivables-page .toolbar-meta {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+app-receivables-page .table-state {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.22rem;
+  justify-items: start;
+}
+
+app-receivables-page .table-state--loading {
+  background: #f7fbf5;
+}
+
+app-receivables-page .table-state--error {
+  border-style: solid;
+  border-color: #e4c7c7;
+  background: #fdf2f2;
+}
+
+app-receivables-page .table-state--empty {
+  justify-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+app-receivables-page .state-title {
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+app-receivables-page .state-subtitle {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+app-receivables-page .icon-action:focus-visible {
+  outline: 2px solid #6a9572;
+  outline-offset: 2px;
+}
+
+@media (max-width: 980px) {
+  app-receivables-page .quick-filters--toolbar {
+    min-width: 0;
+    width: 100%;
+    order: 3;
+  }
+
+  app-receivables-page .filter-reset {
+    order: 2;
+  }
+
+  app-receivables-page .toolbar-meta {
+    width: 100%;
+    margin-left: 0;
+    order: 4;
+  }
+}
+
+@media (max-width: 620px) {
+  app-receivables-page .quick-filter {
+    flex: 1 1 calc(50% - 0.25rem);
+    justify-content: space-between;
+  }
+
+  app-receivables-page .table-toolbar {
+    gap: 0.45rem;
+  }
+
+  app-receivables-page .filter-field,
+  app-receivables-page .filter-field input,
+  app-receivables-page .filter-field select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  app-receivables-page .filter-reset {
+    width: 100%;
+  }
+}
+
 @keyframes rise-in {
   0% {
     opacity: 0;

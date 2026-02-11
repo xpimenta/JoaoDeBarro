@@ -1,0 +1,19 @@
+{
+  "sourcePath": "/Users/xpimenta/RiderProjects/JoaoDeBarro/receivables_2024_organizado.csv",
+  "apiUrl": "http://localhost:15125/api/receivables",
+  "referenceDate": "2026-02-09",
+  "totals": {
+    "records": 237,
+    "skippedRows": 6,
+    "grossAmount": 565004.66,
+    "amountReceived": 530752.86,
+    "outstandingAmount": 22261.01
+  },
+  "statusAfterTransform": {
+    "settled": 210,
+    "overdue": 7,
+    "dueToday": 5,
+    "open": 15,
+    "next7Days": 7
+  }
+}

@@ -28,12 +28,31 @@ public class ReceivableAppService : IReceivableAppService
         return _mapper.Map<IEnumerable<ReceivableDto>>(await _receivableRepository.GetReceivablesAsync());
     }
 
+    public async Task<IEnumerable<ReceivableDto>> GetReceivablesByDueMonthAsync(int year, int month)
+    {
+        return _mapper.Map<IEnumerable<ReceivableDto>>(await _receivableRepository.GetReceivablesByDueMonthAsync(year, month));
+    }
+
     public async Task<Guid> AddReceivable(ReceivableDto receivableDto)
     {
         var receivable = _mapper.Map<Receivable>(receivableDto);
         _receivableRepository.AddReceivable(receivable);
         await _receivableRepository.UnitOfWork.CommitAsync();
         return receivable.Id;
+    }
+
+    public async Task<IReadOnlyCollection<Guid>> AddReceivables(IEnumerable<ReceivableDto> receivableDtos)
+    {
+        var ids = new List<Guid>();
+        foreach (var dto in receivableDtos)
+        {
+            var receivable = _mapper.Map<Receivable>(dto);
+            _receivableRepository.AddReceivable(receivable);
+            ids.Add(receivable.Id);
+        }
+
+        await _receivableRepository.UnitOfWork.CommitAsync();
+        return ids;
     }
 
     public async Task UpdateReceivable(ReceivableDto receivableDto)

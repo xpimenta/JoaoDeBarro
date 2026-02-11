@@ -24,6 +24,13 @@
 
 # Env
 .env
+.env.dev
+.env.prod
+.env.dev.local
+.env.prod.local
+
+# Local spreadsheets
+Controle Financeiro Sandro..xlsx
 
 # Test results / coverage
 TestResults/

@@ -27,6 +27,9 @@ public class ReceivableMapping : IEntityTypeConfiguration<Receivable>
             .IsRequired()
             .HasColumnType("date");
 
+        builder.Property(x => x.PaymentDate)
+            .HasColumnType("date");
+
         builder.Property(x => x.ServiceOrderNumber)
             .HasColumnType("varchar(50)");
 
@@ -56,6 +59,11 @@ public class ReceivableMapping : IEntityTypeConfiguration<Receivable>
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
+        builder.Property<decimal>("_inssAmount")
+            .HasColumnName("InssAmount")
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
+
         builder.Property<decimal>("_amountReceived")
             .HasColumnName("AmountReceived")
             .HasColumnType("decimal(18,2)")
@@ -64,6 +72,7 @@ public class ReceivableMapping : IEntityTypeConfiguration<Receivable>
         // Ignore domain-calculated properties
         builder.Ignore(x => x.GrossAmount);
         builder.Ignore(x => x.IssAmount);
+        builder.Ignore(x => x.InssAmount);
         builder.Ignore(x => x.AmountReceived);
         builder.Ignore(x => x.NetAmount);
         builder.Ignore(x => x.OutstandingAmount);

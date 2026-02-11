@@ -17,14 +17,20 @@ export const routes: Routes = [
       {
         path: 'finance/ap-ar/receivables',
         loadComponent: () =>
-          import('./domains/finance/ap-ar/receivables/pages/receivables.page')
+          import('./domains/finance/ap-ar/receivables/pages/receivables-list/receivables-list.page')
             .then(m => m.ReceivablesPage)
       },
       {
         path: 'finance/ap-ar/receivables/new',
         loadComponent: () =>
-          import('./domains/finance/ap-ar/receivables/pages/receivable-create.page')
-            .then(m => m.ReceivableCreatePage)
+          import('./domains/finance/ap-ar/receivables/pages/receivable-form/receivable-form.page')
+            .then(m => m.ReceivableFormPage)
+      },
+      {
+        path: 'finance/ap-ar/receivables/:id/edit',
+        loadComponent: () =>
+          import('./domains/finance/ap-ar/receivables/pages/receivable-form/receivable-form.page')
+            .then(m => m.ReceivableFormPage)
       },
       {
         path: 'finance/ap-ar/payables',

@@ -1,0 +1,10 @@
+.git
+.idea
+.DS_Store
+**/.DS_Store
+**/bin
+**/obj
+**/node_modules
+WebApps/frontend/dist
+WebApps/frontend/.angular
+

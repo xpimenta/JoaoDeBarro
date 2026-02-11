@@ -45,6 +45,9 @@ namespace JoaoDeBarro.Receivables.Infrastructure.Migrations
                     b.Property<string>("InvoiceNumber")
                         .HasColumnType("varchar(50)");
 
+                    b.Property<DateOnly?>("PaymentDate")
+                        .HasColumnType("date");
+
                     b.Property<int>("PaymentMethod")
                         .HasColumnType("int");
 
@@ -65,6 +68,10 @@ namespace JoaoDeBarro.Receivables.Infrastructure.Migrations
                     b.Property<decimal>("_grossAmount")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("GrossAmount");
+
+                    b.Property<decimal>("_inssAmount")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("InssAmount");
 
                     b.Property<decimal>("_issAmount")
                         .HasColumnType("decimal(18,2)")

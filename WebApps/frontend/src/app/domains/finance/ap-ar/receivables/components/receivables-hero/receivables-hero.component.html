@@ -1,0 +1,28 @@
+<section class="page-hero">
+  <div class="hero-copy">
+    <h2>{{ 'receivables.title' | translate }}</h2>
+    <p class="subtitle">{{ 'receivables.subtitle' | translate }}</p>
+    <div class="hero-chips">
+      <span class="hero-chip">
+        {{
+          (totalRows === 1 ? 'receivables.list.recordSingular' : 'receivables.list.recordPlural')
+            | translate : { count: totalRows }
+        }}
+      </span>
+      <span class="hero-chip hero-chip--soft">
+        {{ 'receivables.cards.pendingItems' | translate }}: {{ pendingItems }}
+      </span>
+      <span class="hero-chip hero-chip--quiet" *ngIf="hasAnyFilters">
+        {{ 'receivables.list.filteredOnly' | translate : { count: visibleRows } }}
+      </span>
+    </div>
+  </div>
+  <button
+    pButton
+    type="button"
+    [routerLink]="['/finance/ap-ar/receivables/new']"
+    icon="pi pi-plus"
+    [label]="'receivables.new' | translate"
+    class="brand-button">
+  </button>
+</section>

@@ -24,7 +24,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(JoaoDeBarro.Receivables.Applic
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendDev", policy =>
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://localhost:4200", "http://localhost:14200")
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
@@ -43,7 +43,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("FrontendDev");
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 

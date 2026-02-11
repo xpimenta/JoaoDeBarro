@@ -25,7 +25,24 @@ public class ReceivableRepository : IReceivableRepository
 
     public async Task<IEnumerable<Receivable>> GetReceivablesAsync()
     {
-        return await _context.Receivables.AsNoTracking().ToListAsync();
+        return await _context.Receivables
+            .AsNoTracking()
+            .OrderBy(r => r.DueDate)
+            .ThenBy(r => r.CustomerName)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Receivable>> GetReceivablesByDueMonthAsync(int year, int month)
+    {
+        var start = new DateOnly(year, month, 1);
+        var end = start.AddMonths(1);
+
+        return await _context.Receivables
+            .AsNoTracking()
+            .Where(r => r.DueDate >= start && r.DueDate < end)
+            .OrderBy(r => r.DueDate)
+            .ThenBy(r => r.CustomerName)
+            .ToListAsync();
     }
 
     public void AddReceivable(Receivable receivable)

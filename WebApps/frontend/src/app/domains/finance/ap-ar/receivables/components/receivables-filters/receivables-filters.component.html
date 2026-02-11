@@ -1,0 +1,60 @@
+<div class="period-toolbar">
+  <div class="period-nav" role="group" [attr.aria-label]="'receivables.filters.periodLabel' | translate">
+    <button pButton type="button" class="brand-button ghost p-button-sm" icon="pi pi-angle-left" (click)="previousMonth.emit()"></button>
+    <button pButton type="button" class="brand-button ghost p-button-sm" icon="pi pi-angle-right" (click)="nextMonth.emit()"></button>
+    <button pButton type="button" class="brand-button ghost p-button-sm" (click)="currentMonth.emit()">
+      {{ 'receivables.filters.currentMonth' | translate }}
+    </button>
+  </div>
+
+  <button type="button" class="period-label period-label--action" (click)="openMonthPicker(monthInput)">
+    <span class="period-label__prefix">{{ 'receivables.filters.periodLabel' | translate }}</span>
+    <span>{{ monthLabel }}</span>
+    <i class="pi pi-calendar" aria-hidden="true"></i>
+  </button>
+
+  <input
+    #monthInput
+    id="receivables-month-ref"
+    class="month-native-picker sr-only"
+    type="month"
+    [ngModel]="monthRef"
+    (ngModelChange)="monthRefChange.emit($event)"
+    [attr.aria-label]="'receivables.filters.periodLabel' | translate" />
+</div>
+
+<div class="table-toolbar">
+  <label class="filter-field search-field">
+    <span class="sr-only">{{ 'receivables.filters.searchLabel' | translate }}</span>
+    <i class="pi pi-search" aria-hidden="true"></i>
+    <input
+      type="search"
+      [ngModel]="searchTerm"
+      (ngModelChange)="searchTermChange.emit($event)"
+      [placeholder]="'receivables.filters.searchPlaceholder' | translate"
+      [attr.aria-label]="'receivables.filters.searchLabel' | translate" />
+  </label>
+  <div class="quick-filters quick-filters--toolbar" role="toolbar" [attr.aria-label]="'receivables.filters.statusLabel' | translate">
+    <button
+      type="button"
+      *ngFor="let option of quickFilterOptions"
+      class="quick-filter"
+      [ngClass]="[quickFilterToneClass(option.value), quickFilter === option.value ? 'is-active' : '']"
+      (click)="quickFilterChange.emit(option.value)"
+      [attr.aria-pressed]="quickFilter === option.value">
+      <span>{{ option.labelKey | translate }}</span>
+      <small>{{ quickCount(option.value) }}</small>
+    </button>
+  </div>
+  <button
+    pButton
+    type="button"
+    class="brand-button ghost filter-reset"
+    *ngIf="hasAnyFilters"
+    (click)="clearFilters.emit()">
+    {{ 'receivables.filters.clear' | translate }}
+  </button>
+  <span class="toolbar-meta" aria-live="polite">
+    {{ 'receivables.list.filteredCount' | translate : { visible: visibleRows, total: totalRows } }}
+  </span>
+</div>

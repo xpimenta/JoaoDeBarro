@@ -1,0 +1,435 @@
+<section class="page-hero">
+  <div class="hero-copy">
+    <h2>{{ (isEditMode ? 'receivables.form.editTitle' : 'receivables.form.title') | translate }}</h2>
+    <p class="muted">{{ (isEditMode ? 'receivables.form.editSubtitle' : 'receivables.form.subtitle') | translate }}</p>
+  </div>
+  <button
+    pButton
+    type="button"
+    class="brand-button ghost"
+    [routerLink]="['/finance/ap-ar/receivables']"
+    label="{{ 'common.back' | translate }}">
+  </button>
+</section>
+
+<form class="form-grid" [formGroup]="form" (ngSubmit)="submit()">
+  <p class="required-hint">
+    <span class="required-asterisk" aria-hidden="true">*</span>
+    {{ 'receivables.form.requiredHint' | translate }}
+  </p>
+
+  <section class="card">
+    <div class="section-head">
+      <h3>{{ 'receivables.form.section.service' | translate }}</h3>
+    </div>
+    <div class="grid">
+      <label>
+        <span class="label-text">
+          {{ 'receivables.form.customerName' | translate }}
+          <span class="required-asterisk" aria-hidden="true">*</span>
+        </span>
+        <input pInputText formControlName="customerName" type="text" />
+        <span class="error" *ngIf="form.get('customerName')?.touched && form.get('customerName')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        <span class="label-text">
+          {{ 'receivables.form.serviceDescription' | translate }}
+          <span class="required-asterisk" aria-hidden="true">*</span>
+        </span>
+        <input pInputText formControlName="serviceDescription" type="text" />
+        <span class="error" *ngIf="form.get('serviceDescription')?.touched && form.get('serviceDescription')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        <span class="label-text">
+          {{ 'receivables.form.serviceDate' | translate }}
+          <span class="required-asterisk" aria-hidden="true">*</span>
+        </span>
+        <input formControlName="serviceDate" type="date" (click)="openNativeDatePicker($event)" (focus)="openNativeDatePicker($event)" />
+        <span class="error" *ngIf="form.get('serviceDate')?.touched && form.get('serviceDate')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+      <label>
+        <span class="label-text">
+          {{ 'receivables.form.serviceOrderNumber' | translate }}
+          <span class="required-asterisk" *ngIf="isInstallmentMode" aria-hidden="true">*</span>
+        </span>
+        <input pInputText formControlName="serviceOrderNumber" type="text" />
+        <span class="error" *ngIf="form.get('serviceOrderNumber')?.touched && form.get('serviceOrderNumber')?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <div class="card-pair">
+    <section class="card">
+      <div class="section-head">
+        <h3>{{ 'receivables.form.section.invoiceData' | translate }}</h3>
+      </div>
+      <div class="grid">
+        <label>
+          <span class="label-text">
+            {{ 'receivables.form.invoiceNumber' | translate }}
+            <span class="required-asterisk" *ngIf="form.get('invoiceIssueDate')?.value" aria-hidden="true">*</span>
+          </span>
+          <input pInputText formControlName="invoiceNumber" type="text" />
+          <span class="error" *ngIf="form.touched && form.hasError('invoiceNumberRequired')">
+            {{ 'validation.invoiceNumberRequired' | translate }}
+          </span>
+        </label>
+        <label>
+          <span class="label-text">
+            {{ 'receivables.form.invoiceIssueDate' | translate }}
+            <span class="required-asterisk" *ngIf="form.get('invoiceNumber')?.value" aria-hidden="true">*</span>
+          </span>
+          <input formControlName="invoiceIssueDate" type="date" (click)="openNativeDatePicker($event)" (focus)="openNativeDatePicker($event)" />
+          <span class="error" *ngIf="form.touched && form.hasError('invoiceIssueDateRequired')">
+            {{ 'validation.invoiceIssueDateRequired' | translate }}
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <section class="card card-billing">
+      <div class="section-head">
+        <h3>{{ 'receivables.form.section.billing' | translate }}</h3>
+      </div>
+      <div class="grid">
+        <label *ngIf="!isInstallmentMode">
+          <span class="label-text">
+            {{ 'receivables.form.dueDate' | translate }}
+            <span class="required-asterisk" aria-hidden="true">*</span>
+          </span>
+          <input formControlName="dueDate" type="date" (click)="openNativeDatePicker($event)" (focus)="openNativeDatePicker($event)" />
+          <span class="error" *ngIf="form.get('dueDate')?.touched && form.get('dueDate')?.hasError('required')">
+            {{ 'validation.required' | translate }}
+          </span>
+        </label>
+        <label>
+          <span class="label-text">
+            {{ 'receivables.form.paymentMethod' | translate }}
+            <span class="required-asterisk" aria-hidden="true">*</span>
+          </span>
+          <select formControlName="paymentMethod">
+            <option value="">{{ 'common.select' | translate }}</option>
+            <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.value">
+              {{ paymentMethod.label }}
+            </option>
+          </select>
+          <span class="error" *ngIf="form.get('paymentMethod')?.touched && form.get('paymentMethod')?.hasError('required')">
+            {{ 'validation.required' | translate }}
+          </span>
+        </label>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" *ngIf="!isEditMode">
+    <div class="section-head">
+      <h3>{{ 'receivables.form.section.installments' | translate }}</h3>
+    </div>
+
+    <div class="grid">
+      <label>
+        {{ 'receivables.form.entryMode' | translate }}
+        <select formControlName="entryMode">
+          <option value="single">{{ 'receivables.form.entryModeSingle' | translate }}</option>
+          <option value="installments">{{ 'receivables.form.entryModeInstallments' | translate }}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="installment-config" *ngIf="isInstallmentMode">
+      <article class="amount-box" style="margin-bottom: .9rem;">
+        <h4>{{ 'receivables.form.amountGroups.expected' | translate }}</h4>
+        <div class="grid expected-iss-controls">
+          <label>
+            {{ 'receivables.form.issMode' | translate }}
+            <select formControlName="issMode">
+              <option value="auto">{{ 'receivables.form.issModeAuto' | translate }}</option>
+              <option value="manual">{{ 'receivables.form.issModeManual' | translate }}</option>
+            </select>
+          </label>
+          <label *ngIf="form.get('issMode')?.value === 'auto'">
+            <span class="label-text">
+              {{ 'receivables.form.issRate' | translate }}
+              <span class="required-asterisk" aria-hidden="true">*</span>
+            </span>
+            <p-inputNumber
+              formControlName="issRate"
+              [min]="0"
+              [max]="100"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="4"
+              suffix="%"></p-inputNumber>
+            <span class="error" *ngIf="form.get('issRate')?.touched && form.get('issRate')?.hasError('required')">
+              {{ 'validation.required' | translate }}
+            </span>
+            <span class="error" *ngIf="form.get('issRate')?.touched && (form.get('issRate')?.hasError('min') || form.get('issRate')?.hasError('max'))">
+              {{ 'validation.issRateRange' | translate }}
+            </span>
+          </label>
+        </div>
+        <div class="grid expected-values-grid" style="padding-top: .6rem;">
+          <label>
+            <span class="label-text">
+              {{ 'receivables.form.grossAmount' | translate }}
+              <span class="required-asterisk" aria-hidden="true">*</span>
+            </span>
+            <p-inputNumber formControlName="grossAmount" [min]="0" mode="decimal"></p-inputNumber>
+          </label>
+          <label>
+            {{ 'receivables.form.issAmount' | translate }}
+            <p-inputNumber formControlName="issAmount" [min]="0" mode="decimal"></p-inputNumber>
+            <span class="error" *ngIf="form.touched && form.hasError('issGreaterThanGross')">
+              {{ 'validation.issGreaterThanGross' | translate }}
+            </span>
+          </label>
+          <label>
+            {{ 'receivables.form.inssAmount' | translate }}
+            <p-inputNumber formControlName="inssAmount" [min]="0" mode="decimal"></p-inputNumber>
+            <span class="error" *ngIf="form.touched && form.hasError('issGreaterThanGross')">
+              {{ 'validation.issGreaterThanGross' | translate }}
+            </span>
+          </label>
+        </div>
+        <div class="net-amount-highlight">
+          <span>{{ 'receivables.form.netAmount' | translate }}</span>
+          <strong>{{ netAmountLabel }}</strong>
+        </div>
+      </article>
+
+      <div class="grid">
+        <label>
+          {{ 'receivables.form.installmentRule' | translate }}
+          <select formControlName="installmentRule">
+            <option value="default30_90_120">{{ 'receivables.form.installmentRuleDefault' | translate }}</option>
+            <option value="monthlyFixedDay">{{ 'receivables.form.installmentRuleFixedDay' | translate }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span class="label-text">
+            {{ 'receivables.form.installmentBaseDate' | translate }}
+            <span class="required-asterisk" aria-hidden="true">*</span>
+          </span>
+          <input formControlName="installmentBaseDate" type="date" (click)="openNativeDatePicker($event)" (focus)="openNativeDatePicker($event)" />
+          <span class="error" *ngIf="form.get('installmentBaseDate')?.touched && form.get('installmentBaseDate')?.hasError('required')">
+            {{ 'validation.required' | translate }}
+          </span>
+        </label>
+
+        <label>
+          <span class="label-text">
+            {{ 'receivables.form.installmentCount' | translate }}
+            <span class="required-asterisk" aria-hidden="true">*</span>
+          </span>
+          <p-inputNumber formControlName="installmentCount" [min]="2" [max]="120" [useGrouping]="false" [minFractionDigits]="0" [maxFractionDigits]="0"></p-inputNumber>
+          <span class="error" *ngIf="form.get('installmentCount')?.touched && form.get('installmentCount')?.hasError('required')">
+            {{ 'validation.required' | translate }}
+          </span>
+          <span class="error" *ngIf="form.get('installmentCount')?.touched && (form.get('installmentCount')?.hasError('min') || form.get('installmentCount')?.hasError('max'))">
+            {{ 'validation.installmentCountRange' | translate }}
+          </span>
+        </label>
+
+        <label *ngIf="isFixedDayInstallmentRule">
+          <span class="label-text">
+            {{ 'receivables.form.fixedDueDay' | translate }}
+            <span class="required-asterisk" aria-hidden="true">*</span>
+          </span>
+          <p-inputNumber formControlName="fixedDueDay" [min]="1" [max]="31" [useGrouping]="false" [minFractionDigits]="0" [maxFractionDigits]="0"></p-inputNumber>
+          <span class="error" *ngIf="form.get('fixedDueDay')?.touched && form.get('fixedDueDay')?.hasError('required')">
+            {{ 'validation.required' | translate }}
+          </span>
+          <span class="error" *ngIf="form.get('fixedDueDay')?.touched && (form.get('fixedDueDay')?.hasError('min') || form.get('fixedDueDay')?.hasError('max'))">
+            {{ 'validation.fixedDueDayRange' | translate }}
+          </span>
+        </label>
+      </div>
+
+      <section class="installment-editor" *ngIf="installmentPreviewRows.length > 0">
+        <div class="installment-editor-head">
+          <h4>{{ 'receivables.form.installmentValuesTitle' | translate }}</h4>
+          <button
+            pButton
+            type="button"
+            class="brand-button ghost installment-refresh-button"
+            (click)="applyInstallmentReference()">
+            {{ 'receivables.form.applyInstallmentReference' | translate }}
+          </button>
+        </div>
+
+        <div
+          class="installment-editor-grid"
+          style="display:grid;grid-template-columns:62px 190px repeat(4,minmax(110px,1fr));gap:.6rem;min-width:840px;margin-bottom:.45rem;padding-bottom:.45rem;border-bottom:1px solid #ebf1e7;font-size:.74rem;font-weight:700;color:var(--page-ink-soft);">
+          <span>{{ 'receivables.form.previewInstallment' | translate }}</span>
+          <span class="label-text">
+            {{ 'receivables.form.previewDueDate' | translate }}
+            <span class="required-asterisk" aria-hidden="true">*</span>
+          </span>
+          <span>{{ 'receivables.form.grossAmount' | translate }}</span>
+          <span>{{ 'receivables.form.issAmount' | translate }}</span>
+          <span>{{ 'receivables.form.inssAmount' | translate }}</span>
+          <span>{{ 'receivables.form.netAmount' | translate }}</span>
+        </div>
+
+        <div
+          class="installment-editor-grid"
+          *ngFor="let row of installmentPreviewRows; let rowIndex = index"
+          style="display:grid;grid-template-columns:62px 190px repeat(4,minmax(110px,1fr));gap:.6rem;align-items:start;min-width:840px;margin-bottom:.5rem;">
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-height:2.8rem;border:1px solid #d7e5d6;border-radius:10px;color:var(--page-ink);font-weight:700;background:#f8fcf6;">
+            {{ row.installmentNumber }}
+          </span>
+          <div class="installment-date-cell">
+            <input
+              type="date"
+              [ngModel]="row.dueDate"
+              [ngModelOptions]="{ standalone: true }"
+              (click)="openNativeDatePicker($event)"
+              (focus)="openNativeDatePicker($event)"
+              (ngModelChange)="updateInstallmentDueDate(rowIndex, $event)" />
+            <span class="error" *ngIf="isInstallmentDueDateInvalid(row)">
+              {{ 'validation.required' | translate }}
+            </span>
+          </div>
+          <p-inputNumber
+            [ngModel]="row.grossAmount"
+            [ngModelOptions]="{ standalone: true }"
+            [min]="0"
+            mode="decimal"
+            (ngModelChange)="updateInstallmentGrossAmount(rowIndex, $event)"></p-inputNumber>
+          <span style="display:inline-flex;align-items:center;min-height:2.8rem;font-weight:700;color:var(--page-ink);">
+            {{ formatCurrency(row.issAmount) }}
+          </span>
+          <span style="display:inline-flex;align-items:center;min-height:2.8rem;font-weight:700;color:var(--page-ink);">
+            {{ formatCurrency(row.inssAmount) }}
+          </span>
+          <span style="display:inline-flex;align-items:center;min-height:2.8rem;font-weight:700;color:var(--page-ink);">
+            {{ formatCurrency(row.netAmount) }}
+          </span>
+        </div>
+
+        <div class="installment-totals">
+          <span>{{ 'receivables.form.installmentTotals' | translate }}</span>
+          <span>{{ 'receivables.form.grossAmount' | translate }}: <strong>{{ formatCurrency(installmentGrossTotal) }}</strong></span>
+          <span>{{ 'receivables.form.issAmount' | translate }}: <strong>{{ formatCurrency(installmentIssTotal) }}</strong></span>
+          <span>{{ 'receivables.form.inssAmount' | translate }}: <strong>{{ formatCurrency(installmentInssTotal) }}</strong></span>
+          <span>{{ 'receivables.form.netAmount' | translate }}: <strong>{{ formatCurrency(installmentNetTotal) }}</strong></span>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="card" *ngIf="!isInstallmentMode">
+    <div class="section-head">
+      <h3>{{ 'receivables.form.section.amounts' | translate }}</h3>
+    </div>
+    <div class="amount-split-grid">
+      <article class="amount-box">
+        <h4>{{ 'receivables.form.amountGroups.expected' | translate }}</h4>
+        <div class="grid expected-iss-controls">
+          <label>
+            {{ 'receivables.form.issMode' | translate }}
+            <select formControlName="issMode">
+              <option value="auto">{{ 'receivables.form.issModeAuto' | translate }}</option>
+              <option value="manual">{{ 'receivables.form.issModeManual' | translate }}</option>
+            </select>
+          </label>
+          <label *ngIf="form.get('issMode')?.value === 'auto'">
+            <span class="label-text">
+              {{ 'receivables.form.issRate' | translate }}
+              <span class="required-asterisk" aria-hidden="true">*</span>
+            </span>
+            <p-inputNumber
+              formControlName="issRate"
+              [min]="0"
+              [max]="100"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="4"
+              suffix="%"></p-inputNumber>
+            <span class="error" *ngIf="form.get('issRate')?.touched && form.get('issRate')?.hasError('required')">
+              {{ 'validation.required' | translate }}
+            </span>
+            <span class="error" *ngIf="form.get('issRate')?.touched && (form.get('issRate')?.hasError('min') || form.get('issRate')?.hasError('max'))">
+              {{ 'validation.issRateRange' | translate }}
+            </span>
+          </label>
+        </div>
+        <div class="grid expected-values-grid" style="padding-top: .6rem;">
+          <label>
+            <span class="label-text">
+              {{ 'receivables.form.grossAmount' | translate }}
+              <span class="required-asterisk" aria-hidden="true">*</span>
+            </span>
+            <p-inputNumber formControlName="grossAmount" [min]="0" mode="decimal"></p-inputNumber>
+          </label>
+          <label>
+            {{ 'receivables.form.issAmount' | translate }}
+            <p-inputNumber formControlName="issAmount" [min]="0" mode="decimal"></p-inputNumber>
+            <span class="error" *ngIf="form.touched && form.hasError('issGreaterThanGross')">
+              {{ 'validation.issGreaterThanGross' | translate }}
+            </span>
+          </label>
+          <label>
+            {{ 'receivables.form.inssAmount' | translate }}
+            <p-inputNumber formControlName="inssAmount" [min]="0" mode="decimal"></p-inputNumber>
+            <span class="error" *ngIf="form.touched && form.hasError('issGreaterThanGross')">
+              {{ 'validation.issGreaterThanGross' | translate }}
+            </span>
+          </label>
+        </div>
+        <div class="net-amount-highlight">
+          <span>{{ 'receivables.form.netAmount' | translate }}</span>
+          <strong>{{ netAmountLabel }}</strong>
+        </div>
+      </article>
+
+      <article class="amount-box">
+        <h4>{{ 'receivables.form.amountGroups.received' | translate }}</h4>
+        <div class="grid">
+          <label>
+            {{ 'receivables.form.amountReceived' | translate }}
+            <p-inputNumber formControlName="amountReceived" [min]="0" mode="decimal"></p-inputNumber>
+            <button type="button" class="inline-action" (click)="applyNetAmountToReceived()" [disabled]="netAmount <= 0">
+              {{ 'receivables.form.useNetAmount' | translate }}
+            </button>
+            <span class="error" *ngIf="form.touched && form.hasError('receivedGreaterThanAvailable')">
+              {{ 'validation.receivedGreaterThanAvailable' | translate }}
+            </span>
+          </label>
+          <label>
+            <span class="label-text">
+              {{ 'receivables.form.paymentDate' | translate }}
+              <span class="required-asterisk" *ngIf="(form.get('amountReceived')?.value ?? 0) > 0" aria-hidden="true">*</span>
+            </span>
+            <input formControlName="paymentDate" type="date" (click)="openNativeDatePicker($event)" (focus)="openNativeDatePicker($event)" />
+            <span class="error" *ngIf="form.touched && form.hasError('paymentDateRequired')">
+              {{ 'validation.paymentDateRequired' | translate }}
+            </span>
+          </label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button pButton type="button" class="brand-button ghost" [routerLink]="['/finance/ap-ar/receivables']">
+      {{ 'common.cancel' | translate }}
+    </button>
+    <button pButton type="submit" class="brand-button" [disabled]="submitting">
+      {{ (isEditMode ? 'common.update' : 'common.save') | translate }}
+    </button>
+  </div>
+
+  <div class="submit-error-banner" *ngIf="submitErrorMessage" role="alert" aria-live="assertive">
+    {{ submitErrorMessage }}
+  </div>
+</form>

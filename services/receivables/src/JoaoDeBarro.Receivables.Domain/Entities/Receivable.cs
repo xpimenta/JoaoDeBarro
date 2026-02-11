@@ -15,18 +15,21 @@ public class Receivable :  Entity,  IAggregateRoot
     public DateOnly? InvoiceIssueDate { get; private set; }
 
     public DateOnly DueDate { get; private set; }
+    public DateOnly? PaymentDate { get; private set; }
     public PaymentMethod PaymentMethod { get; private set; }
     
     public string CurrencyCode { get; private set; } = "BRL";
     
     private decimal _amountReceived;
     private decimal _issAmount;
+    private decimal _inssAmount;
     private decimal _grossAmount;
     
     public Money GrossAmount => Money.Of(_grossAmount, CurrencyCode);
     public Money IssAmount => Money.Of(_issAmount, CurrencyCode);
+    public Money InssAmount => Money.Of(_inssAmount, CurrencyCode);
     public Money AmountReceived => Money.Of(_amountReceived, CurrencyCode);
-    public Money NetAmount => GrossAmount - IssAmount;
+    public Money NetAmount => GrossAmount - IssAmount - InssAmount;
     public Money OutstandingAmount => NetAmount - AmountReceived;
 
     public ReceivableStatus Status
@@ -53,17 +56,20 @@ public class Receivable :  Entity,  IAggregateRoot
         DateOnly dueDate,
         PaymentMethod paymentMethod,
         Money grossAmount,
-        Money issAmount)
+        Money issAmount,
+        Money inssAmount)
     {
         CustomerName = customerName?.Trim() ?? string.Empty;
         ServiceDescription = serviceDescription?.Trim() ?? string.Empty;
         ServiceDate = serviceDate;
         DueDate = dueDate;
+        PaymentDate = null;
         PaymentMethod = paymentMethod;
 
         CurrencyCode = grossAmount.Currency;
         _grossAmount = grossAmount.Amount;
         _issAmount = issAmount.Amount;
+        _inssAmount = inssAmount.Amount;
         _amountReceived = 0m;
 
         Validate();
@@ -79,17 +85,23 @@ public class Receivable :  Entity,  IAggregateRoot
 
         AssertionConcern.AssertNotNull(GrossAmount, "Gross amount is required.");
         AssertionConcern.AssertNotNull(IssAmount, "ISS amount is required.");
+        AssertionConcern.AssertNotNull(InssAmount, "INSS amount is required.");
 
         AssertionConcern.AssertTrue(GrossAmount.Amount >= 0, "Gross amount must be >= 0.");
         AssertionConcern.AssertTrue(IssAmount.Amount >= 0, "ISS amount must be >= 0.");
+        AssertionConcern.AssertTrue(InssAmount.Amount >= 0, "INSS amount must be >= 0.");
         AssertionConcern.AssertTrue(
-            IssAmount.Amount <= GrossAmount.Amount,
-            "ISS amount cannot exceed gross amount."
+            IssAmount.Amount + InssAmount.Amount <= GrossAmount.Amount,
+            "Taxes amount cannot exceed gross amount."
         );
 
         AssertionConcern.AssertTrue(
             GrossAmount.Currency == IssAmount.Currency,
             "Gross amount and ISS amount must have the same currency."
+        );
+        AssertionConcern.AssertTrue(
+            GrossAmount.Currency == InssAmount.Currency,
+            "Gross amount and INSS amount must have the same currency."
         );
     }
 
@@ -111,7 +123,7 @@ public class Receivable :  Entity,  IAggregateRoot
         ServiceOrderNumber = serviceOrderNumber.Trim();
     }
 
-    public void RegisterReceipt(Money receivedAmount)
+    public void RegisterReceipt(Money receivedAmount, DateOnly? paymentDate = null)
     {
         AssertionConcern.AssertNotNull(receivedAmount, "Received amount is required.");
         AssertionConcern.AssertTrue(receivedAmount.Currency == GrossAmount.Currency, "Currency mismatch.");
@@ -122,6 +134,7 @@ public class Receivable :  Entity,  IAggregateRoot
         );
 
         _amountReceived = _amountReceived + receivedAmount.Amount;
+        PaymentDate = paymentDate ?? DateOnly.FromDateTime(DateTime.Now);
     }
 
     public void ChangeDueDate(DateOnly dueDate)
@@ -129,7 +142,7 @@ public class Receivable :  Entity,  IAggregateRoot
         DueDate = dueDate;
     }
 
-    public void ChangePaymentMethod(PaymentMethod paymentMethod)
+    public void ChangePaymentMethod(PaymentMethod paymentMethod)    
     {
         PaymentMethod = paymentMethod;
     }

@@ -1,0 +1,87 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <app-receivables-hero
+    [totalRows]="vm.totalRows"
+    [pendingItems]="vm.totals.pendingItems"
+    [hasAnyFilters]="hasAnyFilters(vm)"
+    [visibleRows]="visibleRowsCount(vm)">
+  </app-receivables-hero>
+
+  <app-receivables-summary-cards
+    *ngIf="!vm.loading && !vm.error"
+    [totals]="vm.totals"
+    [formatMoney]="formatMoneyFn">
+  </app-receivables-summary-cards>
+
+  <section class="panel table-panel">
+    <app-receivables-filters
+      [quickFilterOptions]="quickFilterOptions"
+      [quickFilter]="vm.quickFilter"
+      [quickCounts]="vm.quickCounts"
+      [monthRef]="monthRefControl.value"
+      [monthLabel]="monthLabel"
+      [searchTerm]="searchControl.value"
+      [hasAnyFilters]="hasAnyFilters(vm)"
+      [visibleRows]="visibleRowsCount(vm)"
+      [totalRows]="vm.totalRows"
+      (previousMonth)="onPreviousMonth()"
+      (nextMonth)="onNextMonth()"
+      (currentMonth)="onCurrentMonth()"
+      (monthRefChange)="onMonthRefChange($event)"
+      (quickFilterChange)="setQuickFilter($event)"
+      (searchTermChange)="onSearchTermChange($event)"
+      (clearFilters)="clearFilters()">
+    </app-receivables-filters>
+
+    <div class="table-state table-state--loading" *ngIf="vm.loading" role="status" aria-live="polite">
+      <strong class="state-title">{{ 'receivables.states.loadingTitle' | translate }}</strong>
+      <span class="state-subtitle">{{ 'receivables.states.loadingSubtitle' | translate }}</span>
+    </div>
+
+    <div class="table-state table-state--error" *ngIf="vm.error && !vm.loading" role="alert">
+      <strong class="state-title">{{ 'receivables.states.errorTitle' | translate }}</strong>
+      <span class="state-subtitle">{{ 'receivables.states.errorSubtitle' | translate }}</span>
+      <button pButton type="button" class="brand-button" (click)="reload()">
+        {{ 'common.retry' | translate }}
+      </button>
+    </div>
+
+    <app-receivables-table
+      *ngIf="!vm.loading && !vm.error"
+      [rows]="vm.rows"
+      [pageSize]="pageSize"
+      [serviceOptions]="vm.serviceOptions"
+      [dueDateOptions]="vm.dueDateOptions"
+      [paymentMethodOptions]="vm.paymentMethodOptions"
+      [statusOptions]="vm.statusOptions"
+      [hasAnyFilters]="hasAnyFilters(vm)"
+      [hasPagination]="hasPaginationFn"
+      [formatDate]="formatDateFn"
+      [formatMoney]="formatMoneyFn"
+      [paymentMethodLabel]="paymentMethodLabelFn"
+      [outstandingAmountValue]="outstandingAmountValueFn"
+      [statusClass]="statusClassFn"
+      [statusKey]="statusKeyFn"
+      [canEdit]="canEditFn"
+      (tableFilterChange)="onTableFilter($event)"
+      (openDetails)="openDetails($event)"
+      (editRow)="editRow($event)">
+    </app-receivables-table>
+  </section>
+</ng-container>
+
+<app-receivable-details-dialog
+  [visible]="detailsVisible"
+  [row]="selectedReceivable"
+  [formatDate]="formatDateFn"
+  [formatMoney]="formatMoneyFn"
+  [paymentMethodLabel]="paymentMethodLabelFn"
+  [netAmountValue]="netAmountValueFn"
+  [outstandingAmountValue]="outstandingAmountValueFn"
+  [paidClass]="paidClassFn"
+  [isPaid]="isPaidFn"
+  [statusClass]="statusClassFn"
+  [statusKey]="statusKeyFn"
+  [canEdit]="canEditFn"
+  (visibleChange)="onDetailsVisibleChange($event)"
+  (edit)="editRow($event)">
+</app-receivable-details-dialog>

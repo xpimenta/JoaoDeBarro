@@ -7,9 +7,11 @@ export interface ReceivableDto{
     invoiceNumber?: string;
     invoiceIssueDate?: string;
     dueDate: string;
+    paymentDate?: string | null;
     paymentMethod: string;
     grossAmount: number;
     issAmount: number;
+    inssAmount: number;
     amountReceived: number;
     currencyCode: string;
     netAmount?: number;

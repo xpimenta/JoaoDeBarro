@@ -1,0 +1,54 @@
+.period-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.period-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.period-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.68rem;
+  margin-inline: auto;
+}
+
+.period-label--action {
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.period-label__prefix {
+  color: var(--ink);
+}
+
+.period-label--action:hover {
+  background: #f2f8ef;
+  border-color: #c3d2be;
+}
+
+.period-label--action:focus-visible {
+  outline: 2px solid #6a9572;
+  outline-offset: 2px;
+}
+
+@media (max-width: 920px) {
+  .period-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

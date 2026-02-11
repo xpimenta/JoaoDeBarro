@@ -29,13 +29,91 @@
     "customer": "Customer",
     "amount": "Amount",
     "status": "Status",
+    "filters": {
+      "searchLabel": "Search receivables",
+      "searchPlaceholder": "Search by customer, service or document",
+      "periodLabel": "Period",
+      "currentMonth": "Current month",
+      "statusLabel": "Filter by status",
+      "statusAll": "All statuses",
+      "quick": {
+        "all": "All",
+        "overdue": "Overdue",
+        "dueToday": "Due today",
+        "open": "Open",
+        "next7Days": "Next 7 days",
+        "settled": "Paid"
+      },
+      "clear": "Clear filters"
+    },
+    "states": {
+      "loadingTitle": "Loading receivables",
+      "loadingSubtitle": "Please wait while data is refreshed.",
+      "errorTitle": "Could not load the receivables list",
+      "errorSubtitle": "Check API connectivity and try again.",
+      "emptyTitle": "No receivables registered",
+      "emptySubtitle": "Add a new receivable to get started.",
+      "emptyFilteredTitle": "No results found",
+      "emptyFilteredSubtitle": "Adjust filters to find entries."
+    },
+    "cards": {
+      "grossAmount": "Gross total",
+      "amountReceived": "Received",
+      "outstandingAmount": "Outstanding",
+      "pendingItems": "Pending items",
+      "records": "records"
+    },
+    "list": {
+      "service": "Service",
+      "serviceDate": "Service date",
+      "serviceOrderNumber": "S.O. #",
+      "invoiceNumber": "Invoice #",
+      "invoiceIssueDate": "Issue date",
+      "dueDate": "Due date",
+      "paymentMethod": "Payment method",
+      "grossAmount": "Gross",
+      "issAmount": "ISS",
+      "inssAmount": "INSS",
+      "netAmount": "Net",
+      "amountReceived": "Received",
+      "outstandingAmount": "Outstanding",
+      "paid": "Paid?",
+      "actions": "Actions",
+      "details": "Details",
+      "edit": "Edit",
+      "recordSingular": "{{count}} receivable",
+      "recordPlural": "{{count}} receivables",
+      "filteredOnly": "{{count}} after filters",
+      "filteredCount": "{{visible}} of {{total}} records",
+      "captionTitle": "Financial entries",
+      "captionHint": "Use the eye icon to open full details",
+      "empty": "No receivables found."
+    },
+    "details": {
+      "title": "Receivable details",
+      "sections": {
+        "service": "Service",
+        "document": "Document",
+        "financial": "Financial",
+        "control": "Control"
+      }
+    },
     "form": {
       "title": "New receivable",
       "subtitle": "Fill in the transaction details.",
+      "editTitle": "Edit receivable",
+      "editSubtitle": "Update transaction details.",
       "section": {
         "service": "Service",
         "invoice": "Document",
+        "invoiceData": "Invoice data",
+        "billing": "Due date and collection",
+        "installments": "Installments",
         "amounts": "Amounts"
+      },
+      "amountGroups": {
+        "expected": "Expected amount",
+        "received": "Receipt"
       },
       "customerName": "Customer",
       "serviceDescription": "Service description",
@@ -45,10 +123,40 @@
       "invoiceIssueDate": "Invoice issue date",
       "dueDate": "Due date",
       "paymentMethod": "Payment method",
+      "paymentDate": "Payment date",
+      "entryMode": "Entry mode",
+      "entryModeSingle": "Single entry",
+      "entryModeInstallments": "Installments",
+      "installmentRule": "Due date rule",
+      "installmentRuleDefault": "Every 30 days (30, 60, 90...)",
+      "installmentRuleFixedDay": "Fixed day per month",
+      "installmentBaseDate": "Base date",
+      "installmentCount": "Installment count",
+      "fixedDueDay": "Due day",
+      "installmentValuesTitle": "Values per installment",
+      "applyInstallmentReference": "Reapply reference",
+      "installmentTotals": "Installment totals",
+      "previewInstallment": "Installment",
+      "previewDueDate": "Due date",
+      "previewNetAmount": "Net amount",
+      "previewAdjusted": "Status",
+      "adjustedYes": "Adjusted",
+      "adjustedNo": "Original",
+      "issMode": "ISS mode",
+      "issModeAuto": "Auto-calculate (%)",
+      "issModeManual": "Manual input",
+      "issRate": "ISS rate",
       "grossAmount": "Gross amount",
       "issAmount": "ISS",
+      "inssAmount": "INSS",
+      "netAmount": "Net amount",
       "amountReceived": "Amount received",
-      "currencyCode": "Currency"
+      "useNetAmount": "Use net amount",
+      "currencyCode": "Currency",
+      "requiredHint": "Fields marked with * are required.",
+      "saveErrorGeneric": "Could not save the entry. Please try again.",
+      "saveErrorApiUnavailable": "Could not connect to the receivables API. Check the service and try again.",
+      "saveErrorWithDetail": "Could not save the entry: {{detail}}"
     }
   },
   "status": {
@@ -61,8 +169,12 @@
     "required": "Required field.",
     "invoiceNumberRequired": "Invoice number is required.",
     "invoiceIssueDateRequired": "Invoice issue date is required.",
-    "issGreaterThanGross": "ISS cannot be greater than gross.",
-    "receivedGreaterThanAvailable": "Received cannot exceed available."
+    "paymentDateRequired": "Payment date is required when amount received is informed.",
+    "issGreaterThanGross": "The sum of ISS and INSS cannot be greater than gross.",
+    "receivedGreaterThanAvailable": "Received cannot exceed available.",
+    "issRateRange": "ISS rate must be between 0% and 100%.",
+    "installmentCountRange": "Installment count must be between 2 and 120.",
+    "fixedDueDayRange": "Due day must be between 1 and 31."
   },
   "paymentMethod": {
     "boleto": "Boleto",
@@ -74,7 +186,10 @@
   "common": {
     "back": "Back",
     "cancel": "Cancel",
+    "close": "Close",
+    "retry": "Try again",
     "save": "Save",
+    "update": "Update",
     "select": "Select"
   },
   "payables": {

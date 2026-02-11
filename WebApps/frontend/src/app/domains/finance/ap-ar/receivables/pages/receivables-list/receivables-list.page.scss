@@ -1,0 +1,9 @@
+:host {
+  --page-ink: #2f4136;
+  --page-ink-soft: #607164;
+  --page-line-soft: #e0eadc;
+}
+
+.panel {
+  animation: rise-in 0.38s ease both;
+}

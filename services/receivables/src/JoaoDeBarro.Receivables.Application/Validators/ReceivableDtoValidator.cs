@@ -36,11 +36,25 @@ public class ReceivableDtoValidator : AbstractValidator<ReceivableDto>
 
         RuleFor(x => x.IssAmount)
             .GreaterThanOrEqualTo(0)
-            .LessThanOrEqualTo(x => x.GrossAmount);
+            .LessThanOrEqualTo(x => x.GrossAmount - x.InssAmount);
+
+        RuleFor(x => x.InssAmount)
+            .GreaterThanOrEqualTo(0)
+            .LessThanOrEqualTo(x => x.GrossAmount - x.IssAmount);
 
         RuleFor(x => x.AmountReceived)
             .GreaterThanOrEqualTo(0)
-            .LessThanOrEqualTo(x => x.GrossAmount - x.IssAmount);
+            .LessThanOrEqualTo(x => x.GrossAmount - x.IssAmount - x.InssAmount);
+
+        RuleFor(x => x.PaymentDate)
+            .NotNull()
+            .When(x => x.AmountReceived > 0)
+            .WithMessage("Payment date is required when amount received is informed.");
+
+        RuleFor(x => x.PaymentDate)
+            .Null()
+            .When(x => x.AmountReceived <= 0)
+            .WithMessage("Payment date must be null when there is no payment.");
 
         RuleFor(x => x.InvoiceNumber)
             .NotEmpty()

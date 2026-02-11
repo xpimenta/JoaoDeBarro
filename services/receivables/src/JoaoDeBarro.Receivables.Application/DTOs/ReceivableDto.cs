@@ -15,10 +15,12 @@ public class ReceivableDto
     public DateOnly? InvoiceIssueDate { get; set; }
 
     public DateOnly DueDate { get; set; }
+    public DateOnly? PaymentDate { get; set; }
     public string PaymentMethod { get; set; } = string.Empty;
 
     public decimal GrossAmount { get; set; }
     public decimal IssAmount { get; set; }
+    public decimal InssAmount { get; set; }
     public decimal AmountReceived { get; set; }
     public string CurrencyCode { get; set; } = string.Empty;
 

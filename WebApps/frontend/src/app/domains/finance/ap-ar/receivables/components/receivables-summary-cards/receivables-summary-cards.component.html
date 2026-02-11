@@ -1,0 +1,18 @@
+<section class="summary-grid">
+  <article class="summary-card">
+    <small>{{ 'receivables.cards.grossAmount' | translate }}</small>
+    <strong>{{ formatMoney(totals.grossAmount) }}</strong>
+  </article>
+  <article class="summary-card">
+    <small>{{ 'receivables.cards.amountReceived' | translate }}</small>
+    <strong>{{ formatMoney(totals.amountReceived) }}</strong>
+  </article>
+  <article class="summary-card">
+    <small>{{ 'receivables.cards.outstandingAmount' | translate }}</small>
+    <strong>{{ formatMoney(totals.outstandingAmount) }}</strong>
+  </article>
+  <article class="summary-card">
+    <small>{{ 'receivables.cards.pendingItems' | translate }}</small>
+    <strong>{{ totals.pendingItems }}</strong>
+  </article>
+</section>

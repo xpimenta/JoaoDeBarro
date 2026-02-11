@@ -29,13 +29,91 @@
     "customer": "Nome do Cliente",
     "amount": "Valor",
     "status": "Status",
+    "filters": {
+      "searchLabel": "Buscar recebíveis",
+      "searchPlaceholder": "Buscar por cliente, serviço ou documento",
+      "periodLabel": "Competência",
+      "currentMonth": "Mês atual",
+      "statusLabel": "Filtrar por status",
+      "statusAll": "Todos os status",
+      "quick": {
+        "all": "Todos",
+        "overdue": "Em atraso",
+        "dueToday": "Vence hoje",
+        "open": "Em aberto",
+        "next7Days": "Próx. 7 dias",
+        "settled": "Pagos"
+      },
+      "clear": "Limpar filtros"
+    },
+    "states": {
+      "loadingTitle": "Carregando recebíveis",
+      "loadingSubtitle": "Aguarde enquanto os dados são atualizados.",
+      "errorTitle": "Não foi possível carregar a listagem",
+      "errorSubtitle": "Verifique a conexão com a API e tente novamente.",
+      "emptyTitle": "Nenhum recebível cadastrado",
+      "emptySubtitle": "Adicione um novo recebível para começar.",
+      "emptyFilteredTitle": "Nenhum resultado encontrado",
+      "emptyFilteredSubtitle": "Ajuste os filtros para encontrar lançamentos."
+    },
+    "cards": {
+      "grossAmount": "Bruto total",
+      "amountReceived": "Recebido",
+      "outstandingAmount": "A receber",
+      "pendingItems": "Itens pendentes",
+      "records": "registros"
+    },
+    "list": {
+      "service": "Serviço",
+      "serviceDate": "Data do serviço",
+      "serviceOrderNumber": "Nº O.S.",
+      "invoiceNumber": "N.F.",
+      "invoiceIssueDate": "Emissão",
+      "dueDate": "Vencimento",
+      "paymentMethod": "Forma de pagamento",
+      "grossAmount": "Bruto",
+      "issAmount": "ISS",
+      "inssAmount": "INSS",
+      "netAmount": "Líquido",
+      "amountReceived": "Recebido",
+      "outstandingAmount": "A receber",
+      "paid": "Pago?",
+      "actions": "Ações",
+      "details": "Detalhes",
+      "edit": "Editar",
+      "recordSingular": "{{count}} recebível",
+      "recordPlural": "{{count}} recebíveis",
+      "filteredOnly": "{{count}} após filtros",
+      "filteredCount": "{{visible}} de {{total}} registros",
+      "captionTitle": "Lançamentos financeiros",
+      "captionHint": "Use o ícone de olho para ver os detalhes",
+      "empty": "Nenhum recebível encontrado."
+    },
+    "details": {
+      "title": "Detalhes do recebível",
+      "sections": {
+        "service": "Serviço",
+        "document": "Documento",
+        "financial": "Financeiro",
+        "control": "Controle"
+      }
+    },
     "form": {
       "title": "Novo recebível",
       "subtitle": "Preencha os dados da movimentação.",
+      "editTitle": "Editar recebível",
+      "editSubtitle": "Atualize os dados da movimentação.",
       "section": {
         "service": "Serviço",
         "invoice": "Documento",
+        "invoiceData": "Dados da nota",
+        "billing": "Vencimento e cobrança",
+        "installments": "Parcelamento",
         "amounts": "Valores"
+      },
+      "amountGroups": {
+        "expected": "Valor esperado",
+        "received": "Recebimento"
       },
       "customerName": "Cliente",
       "serviceDescription": "Descrição do serviço",
@@ -45,10 +123,40 @@
       "invoiceIssueDate": "Emissão da nota",
       "dueDate": "Vencimento",
       "paymentMethod": "Forma de pagamento",
+      "paymentDate": "Data de pagamento",
+      "entryMode": "Modo de lançamento",
+      "entryModeSingle": "Lançamento único",
+      "entryModeInstallments": "Parcelado",
+      "installmentRule": "Regra de vencimento",
+      "installmentRuleDefault": "A cada 30 dias (30, 60, 90...)",
+      "installmentRuleFixedDay": "Dia fixo no mês",
+      "installmentBaseDate": "Data base",
+      "installmentCount": "Quantidade de parcelas",
+      "fixedDueDay": "Dia de vencimento",
+      "installmentValuesTitle": "Valores por parcela",
+      "applyInstallmentReference": "Reaplicar referência",
+      "installmentTotals": "Totais das parcelas",
+      "previewInstallment": "Parcela",
+      "previewDueDate": "Vencimento",
+      "previewNetAmount": "Valor líquido",
+      "previewAdjusted": "Status",
+      "adjustedYes": "Ajustada",
+      "adjustedNo": "Original",
+      "issMode": "Modo do ISS",
+      "issModeAuto": "Calcular automaticamente (%)",
+      "issModeManual": "Informar manualmente",
+      "issRate": "Alíquota de ISS",
       "grossAmount": "Valor bruto",
       "issAmount": "ISS",
+      "inssAmount": "INSS",
+      "netAmount": "Valor líquido",
       "amountReceived": "Valor recebido",
-      "currencyCode": "Moeda"
+      "useNetAmount": "Usar valor líquido",
+      "currencyCode": "Moeda",
+      "requiredHint": "Campos marcados com * são obrigatórios.",
+      "saveErrorGeneric": "Não foi possível salvar o lançamento. Tente novamente.",
+      "saveErrorApiUnavailable": "Não foi possível conectar com a API de recebíveis. Verifique o serviço e tente novamente.",
+      "saveErrorWithDetail": "Não foi possível salvar o lançamento: {{detail}}"
     }
   },
   "status": {
@@ -61,8 +169,12 @@
     "required": "Campo obrigatório.",
     "invoiceNumberRequired": "Informe o número da nota.",
     "invoiceIssueDateRequired": "Informe a data de emissão.",
-    "issGreaterThanGross": "O ISS não pode ser maior que o bruto.",
-    "receivedGreaterThanAvailable": "O recebido não pode ser maior que o disponível."
+    "paymentDateRequired": "Informe a data de pagamento quando houver valor recebido.",
+    "issGreaterThanGross": "A soma de ISS e INSS não pode ser maior que o bruto.",
+    "receivedGreaterThanAvailable": "O recebido não pode ser maior que o disponível.",
+    "issRateRange": "A alíquota de ISS deve ficar entre 0% e 100%.",
+    "installmentCountRange": "A quantidade de parcelas deve ficar entre 2 e 120.",
+    "fixedDueDayRange": "O dia de vencimento deve ficar entre 1 e 31."
   },
   "paymentMethod": {
     "boleto": "Boleto",
@@ -74,7 +186,10 @@
   "common": {
     "back": "Voltar",
     "cancel": "Cancelar",
+    "close": "Fechar",
+    "retry": "Tentar novamente",
     "save": "Salvar",
+    "update": "Atualizar",
     "select": "Selecione"
   },
   "payables": {
